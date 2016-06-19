@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: red;
+	color: white;
+}
+
+#countdowntimeparagraph {
+	text-align: center;
+	font-size: 500%;
+}

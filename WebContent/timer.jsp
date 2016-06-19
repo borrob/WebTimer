@@ -4,14 +4,14 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="css/style.css">
 		<title>WebTImer</title>
 	</head>
 	<body>
 		<h1>WebTimer</h1>
-		<p>Hello</p>
-		<p>
+		<p id="countdowntimeparagraph">
 			<%
-			out.println(request.getAttribute("countdown"));
+			out.println(Integer.parseInt("" + request.getAttribute("countdown"))/1000);
 			%>
 		</p>
 	</body>
