@@ -11,7 +11,7 @@ public class CountdownTimer {
 	private int updateInterval = 1000;
 
 	int interval = 60000; //the countdown interval - default: 60 seconds
-	int countdown = 60000; //the time left over in the current interval
+	static int countdown = 60000; //the time left over in the current interval
 	boolean isRunning = false;
 
 	boolean start(){
