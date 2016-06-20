@@ -14,18 +14,13 @@ import com.webtimer.timer.CountdownTimer;
 public class AjaxTimerServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private CountdownTimer cdt;
 
     public AjaxTimerServlet() {
     	super();
-    	cdt = new CountdownTimer();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println(cdt.countdown);
-		response.getWriter().append("" + cdt.countdown/1000);
+		response.getWriter().append("" + CountdownTimer.countdown/1000);
 	}
 
 }

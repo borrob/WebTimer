@@ -34,7 +34,7 @@ public class TimerServlet extends HttpServlet {
 		/*
 		 * Get the countdown time and forward to the jsp page.
 		 */
-		request.setAttribute("countdown", "" + cdt.countdown);
+		request.setAttribute("countdown", "" + CountdownTimer.countdown);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer.jsp");
 		dispatcher.forward(request,response);
 	}
