@@ -41,6 +41,11 @@ public class TimerServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String newtime_string = request.getParameter("newcountdowntime");
+		int newtime = Integer.parseInt(newtime_string);
+		if (newtime >= 3 && newtime <= 100){
+			cdt.setNewTime(newtime*1000);
+		}
 		doGet(request, response);
 	}
 

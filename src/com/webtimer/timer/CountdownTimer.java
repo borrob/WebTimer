@@ -47,4 +47,8 @@ public class CountdownTimer {
 		}
 		countdown -= updateInterval;
 	}
+
+	public void setNewTime(int newtime) {
+		interval = newtime;
+	}
 }

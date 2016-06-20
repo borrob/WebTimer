@@ -15,5 +15,10 @@
 			out.println(Integer.parseInt("" + request.getAttribute("countdown"))/1000);
 			%>
 		</p>
+		<h2>New time</h2>
+		<form action="timer" method="post">
+			<input type="number" id="newcountdown" name="newcountdowntime" min=3 max=100>
+			<input type="submit" value="Submit">
+		</form>
 	</body>
 </html>
