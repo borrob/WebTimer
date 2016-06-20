@@ -5,9 +5,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/app.js"></script>
 		<title>WebTImer</title>
 	</head>
-	<body>
+	<body onload="update()">
 		<h1>WebTimer</h1>
 		<p id="countdowntimeparagraph">
 			<%
