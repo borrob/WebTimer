@@ -21,7 +21,7 @@ public class AjaxTimerServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("" + CountdownTimer.countdown/1000);
+		response.getWriter().append(String.valueOf(CountdownTimer.countdown/1000));
 	}
 
 }

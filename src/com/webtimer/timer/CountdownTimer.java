@@ -21,7 +21,7 @@ public class CountdownTimer {
 					@Override
 					public void run(){
 						timeStep();
-						System.out.println("Timer is at: " + countdown);
+						System.out.println("Timer is at: " + String.valueOf(countdown));
 					}
 				},
 				this.delay,
