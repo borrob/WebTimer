@@ -35,6 +35,7 @@ public class TimerServlet extends HttpServlet {
 		 * Get the countdown time and forward to the jsp page.
 		 */
 		request.setAttribute("countdown", String.valueOf(CountdownTimer.countdown));
+		request.setAttribute("timers", String.valueOf(CountdownTimer.timers));
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer.jsp");
 		dispatcher.forward(request,response);
 	}
@@ -44,7 +45,7 @@ public class TimerServlet extends HttpServlet {
 		String newtime_string = request.getParameter("newcountdowntime");
 		int newtime = Integer.parseInt(newtime_string);
 		if (newtime >= 3 && newtime <= 100){
-			cdt.setNewTime(newtime*1000);
+			cdt.addToTimerString(newtime);
 		}
 		doGet(request, response);
 	}

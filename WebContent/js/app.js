@@ -16,6 +16,15 @@ function update(){
 	  xhttp.open("GET", "AjaxTimer", true);
 	  xhttp.send();
 	  
+	  var xhttpTimer = new XMLHttpRequest();
+	  xhttpTimer.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				document.getElementById("timersparagraph").innerHTML = xhttpTimer.responseText;
+		    }
+		  };
+		  xhttpTimer.open("GET", "AjaxTimerTimer", true);
+		  xhttpTimer.send();
+	  
 	  //repeat update after 1 sec
 	  setTimeout(function() { update() }, 1000);
 }
