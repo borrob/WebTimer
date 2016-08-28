@@ -10,8 +10,7 @@ public class CountdownTimer {
 	private int delay = 0;
 	private int updateInterval = 1000;
 
-	static String timers = "10,7,8"; //starting list of count down times [s]
-	private int interval = 60000; //the countdown interval - default: 60 seconds
+	private int interval = 90000; //the countdown interval - default: 90 seconds
 	static int countdown = 3000; //the time left over in the current interval
 	boolean isRunning = false;
 
@@ -44,20 +43,8 @@ public class CountdownTimer {
 		 * Reset interval when it runs out.
 		 */
 		if (countdown <= 0){
-			//TODO: perhaps makes this an array or list or something: a bit ugly to work with this string
-			int kommaPlace = timers.indexOf(",");
-			if (kommaPlace > 0){
-				interval = Integer.parseInt(timers.substring(0, kommaPlace)) * 1000;
-				timers = timers.substring(kommaPlace+1);
-			} else {
-				interval = Integer.parseInt(timers) * 1000;
-			}
 			countdown = interval;
 		}
 		countdown -= updateInterval;
-	}
-	
-	public void addToTimerString(int time){
-		timers += "," + String.valueOf(time);
 	}
 }
