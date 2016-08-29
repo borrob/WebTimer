@@ -9,3 +9,22 @@ body {
 	text-align: center;
 	font-size: 500%;
 }
+
+.timerControl {
+	width: 50%;
+}
+
+.timerControlBox {
+	float: left;
+	padding: 30px 0;
+    width: 100%;
+    border: 3px solid white;
+    text-align: center;
+    margin: auto;
+}
+
+a.timerControl {
+	color: white;
+	text-decoration: none;
+	font-size: 300%;
+}
