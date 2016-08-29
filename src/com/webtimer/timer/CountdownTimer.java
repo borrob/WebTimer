@@ -10,10 +10,29 @@ public class CountdownTimer {
 	private int delay = 0;
 	private int updateInterval = 1000;
 
-	private int interval = 90000; //the countdown interval - default: 90 seconds
-	static int countdown = 3000; //the time left over in the current interval
+	private static int interval = 90000; //the countdown interval - default: 90 seconds
+	private static int countdown = 3000; //the time left over in the current interval
 	boolean isRunning = false;
+	
+	/* GETTER AND SETTERS */
+	
+	public static int getInterval() {
+		return interval;
+	}
 
+	public static void setInterval(int interval) {
+		CountdownTimer.interval = interval;
+	}
+
+	public static int getCountdown() {
+		return countdown;
+	}
+
+	public static void setCountdown(int countdown) {
+		CountdownTimer.countdown = countdown;
+	}
+	
+	/*METHODS*/
 	boolean start(){
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
