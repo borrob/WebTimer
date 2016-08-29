@@ -24,6 +24,7 @@ public class TimerMinus extends HttpServlet {
     }
 
 	/**
+	 * Subtract a bit of time from the next interval and refresh the page. 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

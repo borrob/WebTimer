@@ -24,6 +24,7 @@ public class TimerPlus extends HttpServlet {
     }
 
 	/**
+	 * Add a bit of time to the next interval and refresh the page.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

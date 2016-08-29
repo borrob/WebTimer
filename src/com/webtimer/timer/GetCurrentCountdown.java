@@ -19,6 +19,10 @@ public class GetCurrentCountdown extends HttpServlet {
     	super();
     }
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 * Returns a simpel text-string of the current countdown.
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()/1000));

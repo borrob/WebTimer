@@ -19,7 +19,11 @@ public class GetNextCountdown extends HttpServlet {
     	super();
     }
 
-	@Override
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 * Returns a simpel text-string of the next interval.
+	 */
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append(String.valueOf(CountdownTimer.getInterval()/1000));
 	}

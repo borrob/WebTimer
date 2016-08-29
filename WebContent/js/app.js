@@ -1,4 +1,5 @@
 function update(){
+	//Get the new timer and next interval and put it on the page.
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
