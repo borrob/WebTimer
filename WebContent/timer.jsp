@@ -18,13 +18,8 @@
 		<h2>New timers</h2>
 		<p id="timersparagraph">
 			<%
-			out.println(request.getAttribute("timers"));
+			out.println(request.getAttribute("next_interval"));
 			%>
 		</p>
-		<h2>New time</h2>
-		<form action="timer" method="post">
-			<input type="number" id="newcountdown" name="newcountdowntime" min=3 max=100/>
-			<input type="submit" value="Submit"/>
-		</form>
 	</body>
 </html>

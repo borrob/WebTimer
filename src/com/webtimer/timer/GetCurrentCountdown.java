@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.webtimer.timer.CountdownTimer;
 
 
-@WebServlet("/AjaxTimer")
-public class AjaxTimerServlet extends HttpServlet {
+@WebServlet("/getCurrentCountdown")
+public class GetCurrentCountdown extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public AjaxTimerServlet() {
+    public GetCurrentCountdown() {
     	super();
     }
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(String.valueOf(CountdownTimer.countdown/1000));
+		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()/1000));
 	}
 
 }
