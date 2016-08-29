@@ -17,6 +17,12 @@ public class CountdownTimer {
 	private static int plusTime = 10000;
 	private static int minusTime = 10000;
 	
+	/*
+	 * The interval must be between <lowerLimit> and <higherLimit>
+	 */
+	private static int lowerLimit = 20000;
+	private static int higherLimit = 120000;
+	
 	/* GETTER AND SETTERS */
 	
 	public static int getInterval() {
@@ -71,10 +77,14 @@ public class CountdownTimer {
 	}
 	
 	static void doPlus(){
+		if (interval >= CountdownTimer.lowerLimit && interval < CountdownTimer.higherLimit){
 		interval += CountdownTimer.plusTime;
+		}
 	}
 	
 	static void doMinus(){
-		interval -= minusTime;
+		if (interval > CountdownTimer.lowerLimit && interval <= CountdownTimer.higherLimit){
+			interval -= minusTime;
+		}
 	}
 }
