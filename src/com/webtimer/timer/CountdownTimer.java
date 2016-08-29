@@ -14,6 +14,9 @@ public class CountdownTimer {
 	private static int countdown = 3000; //the time left over in the current interval
 	boolean isRunning = false;
 	
+	private static int plusTime = 10000;
+	private static int minusTime = 10000;
+	
 	/* GETTER AND SETTERS */
 	
 	public static int getInterval() {
@@ -65,5 +68,13 @@ public class CountdownTimer {
 			countdown = interval;
 		}
 		countdown -= updateInterval;
+	}
+	
+	static void doPlus(){
+		interval += CountdownTimer.plusTime;
+	}
+	
+	static void doMinus(){
+		interval -= minusTime;
 	}
 }

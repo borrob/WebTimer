@@ -21,5 +21,6 @@
 			out.println(request.getAttribute("next_interval"));
 			%>
 		</p>
+		<a href="TimerPlus">+++</a><a href="TimerMinus">---</a>
 	</body>
 </html>
