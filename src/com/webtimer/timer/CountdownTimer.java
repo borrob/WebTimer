@@ -102,7 +102,6 @@ public class CountdownTimer {
 		if (countdown <= 0){
 			countdown = interval;
 			interval = interval2;
-			//TODO: Ask: should interval2 reset to default or stay at its settings?
 			interval2 = this.DEFAULT_INTERVAL;
 		}
 		countdown -= UPDATE_INTERVAL;
