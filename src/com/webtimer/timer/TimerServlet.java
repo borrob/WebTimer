@@ -43,7 +43,7 @@ public class TimerServlet extends HttpServlet {
 		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
 		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
 		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/timer.jsp");
 		dispatcher.forward(request,response);
 	}
 
