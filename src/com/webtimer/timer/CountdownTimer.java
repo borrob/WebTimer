@@ -7,15 +7,68 @@ public class CountdownTimer {
 
 	private Timer timer;
 
-	private int delay = 0;
-	private int updateInterval = 1000;
+	private final int DELAY = 0;
+	private final int UPDATE_INTERVAL = 1000;
 
-	static String timers = "10,7,8"; //starting list of count down times [s]
-	private int interval = 60000; //the countdown interval - default: 60 seconds
-	static int countdown = 3000; //the time left over in the current interval
+	private final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
+	
+	private static int interval;
+	private static int interval2;
+	private static int countdown = 3000; //the time left over in the current interval
 	boolean isRunning = false;
+	
+	/*
+	 * Default values to change the interval with.
+	 */
+	//Todo: move these to a conf file.
+	private static int plusTime = 10000;
+	private static int minusTime = 10000;
+	
+	/*
+	 * The interval must be between <lowerLimit> and <higherLimit>
+	 */
+	private static int lowerLimit = 20000;
+	private static int higherLimit = 120000;
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	/* GETTER AND SETTERS */
+	
+	public static int getInterval() {
+		return interval;
+	}
 
+	public static void setInterval(int interval) {
+		CountdownTimer.interval = interval;
+	}
+	
+	public static int getInterval2() {
+		return interval2;
+	}
+
+	public static void setInterval2(int interval) {
+		CountdownTimer.interval2 = interval;
+	}
+
+	public static int getCountdown() {
+		return countdown;
+	}
+
+	public static void setCountdown(int countdown) {
+		CountdownTimer.countdown = countdown;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	
+	/*METHODS*/
+	
+	/*
+	 * Start the timer and keep it going.
+	 */
 	boolean start(){
+		interval = this.DEFAULT_INTERVAL;
+		interval2 = this.DEFAULT_INTERVAL;
+		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
 				new TimerTask(){
@@ -25,39 +78,75 @@ public class CountdownTimer {
 						System.out.println("Timer is at: " + String.valueOf(countdown));
 					}
 				},
-				this.delay,
-				this.updateInterval
+				this.DELAY,
+				this.UPDATE_INTERVAL
 				);
 		isRunning=true;
 		return isRunning;
 	}
 
+	/*
+	 * Stop the timer.
+	 */
 	boolean stop(){
 		timer.cancel();
 		isRunning=false;
 		return isRunning;
 	}
 
+	/*
+	 * Helper method to update the time left over in the current run.
+	 * Reset interval when it runs out.
+	 */
 	private void timeStep(){
-		/*
-		 * Helper method to update the time left over in the current run.
-		 * Reset interval when it runs out.
-		 */
 		if (countdown <= 0){
-			//TODO: perhaps makes this an array or list or something: a bit ugly to work with this string
-			int kommaPlace = timers.indexOf(",");
-			if (kommaPlace > 0){
-				interval = Integer.parseInt(timers.substring(0, kommaPlace)) * 1000;
-				timers = timers.substring(kommaPlace+1);
-			} else {
-				interval = Integer.parseInt(timers) * 1000;
-			}
 			countdown = interval;
+			interval = interval2;
+			//TODO: Ask: should interval2 reset to default or stay at its settings?
+			interval2 = this.DEFAULT_INTERVAL;
 		}
-		countdown -= updateInterval;
+		countdown -= UPDATE_INTERVAL;
 	}
 	
-	public void addToTimerString(int time){
-		timers += "," + String.valueOf(time);
+	/*
+	 * Add a bit of extra time to the next timer.
+	 * Must be between the two limits.
+	 */
+	static void doPlus(){
+		if (interval >= CountdownTimer.lowerLimit && interval < CountdownTimer.higherLimit){
+		interval += plusTime;
+		}
+	}
+	
+	/*
+	 * Subtract a bit of extra time from the next timer.
+	 * Must be between the two limits.
+	 */
+	static void doMinus(){
+		if (interval > CountdownTimer.lowerLimit && interval <= CountdownTimer.higherLimit){
+			interval -= minusTime;
+		}
+	}
+	
+	//TODO: DRY-principle for interval2
+	
+	/*
+	 * Add a bit of extra time to the next timer.
+	 * Must be between the two limits.
+	 */
+	static void doPlus2(){
+		if (interval2 >= CountdownTimer.lowerLimit && interval2 < CountdownTimer.higherLimit){
+		interval2 += plusTime;
+		}
+	}
+	
+	/*
+	 * Subtract a bit of extra time from the next timer.
+	 * Must be between the two limits.
+	 */
+	static void doMinus2(){
+		if (interval2 > CountdownTimer.lowerLimit && interval2 <= CountdownTimer.higherLimit){
+			interval2 -= minusTime;
+		}
 	}
 }

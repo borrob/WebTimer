@@ -22,6 +22,12 @@ public class TimerServlet extends HttpServlet {
 		super();
 	}
 
+	/* 
+	 * Start the timer.
+	 * 
+	 * (non-Javadoc)
+	 * @see javax.servlet.GenericServlet#init()
+	 */
 	@Override
 	public void init() throws ServletException {
 		System.out.println("Starting up WebTimer");
@@ -29,27 +35,29 @@ public class TimerServlet extends HttpServlet {
 		cdt.start();
 	}
 
+	/*
+	 * Get the countdown time and forward to the jsp page.
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * Get the countdown time and forward to the jsp page.
-		 */
-		request.setAttribute("countdown", String.valueOf(CountdownTimer.countdown));
-		request.setAttribute("timers", String.valueOf(CountdownTimer.timers));
+		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
+		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
+		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer.jsp");
 		dispatcher.forward(request,response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String newtime_string = request.getParameter("newcountdowntime");
-		int newtime = Integer.parseInt(newtime_string);
-		if (newtime >= 3 && newtime <= 100){
-			cdt.addToTimerString(newtime);
-		}
 		doGet(request, response);
 	}
 
+	/* 
+	 * Stop the timer.
+	 * 
+	 * (non-Javadoc)
+	 * @see javax.servlet.GenericServlet#destroy()
+	 */
 	@Override
 	public void destroy(){
 		System.out.println("Shutting down WebTimer");

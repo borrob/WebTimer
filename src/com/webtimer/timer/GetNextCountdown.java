@@ -10,18 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.webtimer.timer.CountdownTimer;
 
 
-@WebServlet("/AjaxTimerTimer")
-public class AjaxTimerTimerServlet extends HttpServlet {
+@WebServlet("/getNextCountdown")
+public class GetNextCountdown extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-    public AjaxTimerTimerServlet() {
+    public GetNextCountdown() {
     	super();
     }
 
-	@Override
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 * Returns a simpel text-string of the next interval.
+	 */
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(String.valueOf(CountdownTimer.timers));
+		response.getWriter().append(String.valueOf(CountdownTimer.getInterval()/1000));
 	}
 
 }
