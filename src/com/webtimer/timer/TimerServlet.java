@@ -42,6 +42,7 @@ public class TimerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
 		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
+		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer.jsp");
 		dispatcher.forward(request,response);
 	}
