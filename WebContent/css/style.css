@@ -12,6 +12,7 @@ body {
 
 .timerControl {
 	width: 50%;
+	float: left;
 }
 
 .timerControlBox {
