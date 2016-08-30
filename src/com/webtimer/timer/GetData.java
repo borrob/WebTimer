@@ -25,6 +25,7 @@ public class GetData extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/text;charset=UTF-8");
 		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()/1000));
 		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval()/1000));
 		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval2()/1000));
