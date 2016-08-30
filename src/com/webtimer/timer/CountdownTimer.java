@@ -7,10 +7,10 @@ public class CountdownTimer {
 
 	private Timer timer;
 
-	private int delay = 0;
-	private int updateInterval = 1000;
+	private final int DELAY = 0;
+	private final int UPDATE_INTERVAL = 1000;
 
-	private int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
+	private final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
 	
 	private static int interval;
 	private static int interval2;
@@ -78,8 +78,8 @@ public class CountdownTimer {
 						System.out.println("Timer is at: " + String.valueOf(countdown));
 					}
 				},
-				this.delay,
-				this.updateInterval
+				this.DELAY,
+				this.UPDATE_INTERVAL
 				);
 		isRunning=true;
 		return isRunning;
@@ -105,7 +105,7 @@ public class CountdownTimer {
 			//TODO: Ask: should interval2 reset to default or stay at its settings?
 			interval2 = this.DEFAULT_INTERVAL;
 		}
-		countdown -= updateInterval;
+		countdown -= UPDATE_INTERVAL;
 	}
 	
 	/*
