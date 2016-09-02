@@ -23,8 +23,8 @@
 				out.println(request.getAttribute("next_interval"));
 				%>
 			</p>
-			<div class="timerControlBox"><a href="TimerPlus" class="timerControl">+++</a></div>
-			<div class="timerControlBox"><a href="TimerMinus" class="timerControl">---</a></div>
+			<div class="timerControlBox"><a href="TimerAction?action=plus" class="timerControl">+++</a></div>
+			<div class="timerControlBox"><a href="TimerAction?action=minus" class="timerControl">---</a></div>
 		</div>
 		<div class="timerControl">
 			<p id="timersparagraph2">
@@ -32,8 +32,8 @@
 				out.println(request.getAttribute("next_interval2"));
 				%>
 			</p>
-			<div class="timerControlBox"><a href="TimerPlus2" class="timerControl">+++</a></div>
-			<div class="timerControlBox"><a href="TimerMinus2" class="timerControl">---</a></div>
+			<div class="timerControlBox"><a href="TimerAction?action=plus2" class="timerControl">+++</a></div>
+			<div class="timerControlBox"><a href="TimerAction?action=minus2" class="timerControl">---</a></div>
 		</div>
 	</body>
 </html>

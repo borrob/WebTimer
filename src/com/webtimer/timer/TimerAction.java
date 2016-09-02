@@ -10,25 +10,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class TimerPlus
+ * Servlet implementation class TimerAction
  */
-@WebServlet("/TimerPlus2")
-public class TimerPlus2 extends HttpServlet {
+@WebServlet("/TimerAction")
+public class TimerAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TimerPlus2() {
+    public TimerAction() {
         super();
     }
 
 	/**
-	 * Add a bit of time to the next interval and refresh the page.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CountdownTimer.doPlus2();
+		if (request.getParameterMap().containsKey("action")) {
+			String theAction = request.getParameter("action");
+			switch (theAction) {
+				case "plus":	CountdownTimer.doPlus();
+								break;
+				case "plus2":	CountdownTimer.doPlus2();
+								break;
+				case "minus":	CountdownTimer.doMinus();
+								break;
+				case "minus2":	CountdownTimer.doMinus2();
+								break;
+			}
+		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
 		dispatcher.forward(request,response);
 	}
