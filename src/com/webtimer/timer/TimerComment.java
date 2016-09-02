@@ -23,7 +23,15 @@ public class TimerComment extends HttpServlet {
         super();
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");	
+		dispatcher.forward(request,response);
+	}
+    
+    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
