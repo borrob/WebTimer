@@ -7,6 +7,7 @@ function update(){
 			document.getElementById("countdowntimeparagraph").innerHTML = data[0];
 			document.getElementById("timersparagraph").innerHTML = data[1];
 			document.getElementById("timersparagraph2").innerHTML = data[2];
+			document.getElementById("userComments").innerHTML = data[3];
 			
 			//change background color when count down is reached
 			var countdown = parseInt(data[0]);
