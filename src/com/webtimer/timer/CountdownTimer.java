@@ -15,6 +15,7 @@ public class CountdownTimer {
 	private static int interval;
 	private static int interval2;
 	private static int countdown = 3000; //the time left over in the current interval
+	private static String comments = "";
 	boolean isRunning = false;
 	
 	/*
@@ -56,6 +57,14 @@ public class CountdownTimer {
 
 	public static void setCountdown(int countdown) {
 		CountdownTimer.countdown = countdown;
+	}
+	
+	public static String getComments(){
+		return comments;
+	}
+	
+	public static void setComments(String c){
+		CountdownTimer.comments = c;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
@@ -147,5 +156,15 @@ public class CountdownTimer {
 		if (interval2 > CountdownTimer.lowerLimit && interval2 <= CountdownTimer.higherLimit){
 			interval2 -= minusTime;
 		}
+	}
+	
+	static void clearComments(){
+		//TODO: write javadoc
+		CountdownTimer.comments = "";
+	}
+	
+	static void addToComments(String c){
+		//TODO: write javadoc
+		CountdownTimer.comments = c + "<BR>" + CountdownTimer.comments;
 	}
 }

@@ -16,7 +16,11 @@
 			%>
 		</p>
 		<div>
-			<p id="userComments"/>
+			<p id="userComments">
+			<%
+				out.println(request.getAttribute("userComments"));
+			%>
+			</p>
 			<form method="POST" action="TimerComment">
 				<label for="userCommentInput">Add comment:</label>
 				<input type="text" id="userCommentInput" name="userCommentInput" value="type..."/>
