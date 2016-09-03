@@ -31,6 +31,8 @@ public class CountdownTimer {
 	private static int lowerLimit = 20000;
 	private static int higherLimit = 120000;
 	
+	private static int maxLinesUserComments = 5;
+
 	//////////////////////////////////////////////////////////////////////////////////
 	
 	/* GETTER AND SETTERS */
@@ -165,6 +167,31 @@ public class CountdownTimer {
 	
 	static void addToComments(String c){
 		//TODO: write javadoc
-		CountdownTimer.comments = c + "<BR>" + CountdownTimer.comments;
+		if (CountdownTimer.comments.isEmpty()){
+			CountdownTimer.comments = c;
+			return;
+		}
+		checkAndLimitUserComments();
+		CountdownTimer.comments = c + "<BR/>" + CountdownTimer.comments;
+	}
+	
+	/**
+	 * check the number of lines with user comments and limit them (remove the first one) if necessary
+	 * 
+	 * This method checks if the number of lines is not going to exceed the
+	 * maximum number when you add one. ie.: this function limits the user
+	 * comments to maxLinesUserComments minus one. Although a small effect, but
+	 * it limits the memory footprint and should reduce a couple of computing
+	 * cycles.
+	 */
+	static private void checkAndLimitUserComments(){
+		String[] l_comments = comments.split("<BR/>");
+		if (l_comments.length > maxLinesUserComments -1 ){
+			comments = l_comments[maxLinesUserComments - 2];
+			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
+				comments = l_comments[i] + "<BR/>" + comments;
+			}
+		}
 	}
 }
+
