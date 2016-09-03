@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>WebTimer</groupId>
   <artifactId>WebTimer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>war</packaging>
   <name>WebTimer</name>
   <description>A egg timer over the internet.</description>
