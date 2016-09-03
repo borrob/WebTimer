@@ -123,7 +123,7 @@ public class CountdownTimer {
 	 * Must be between the two limits.
 	 */
 	static void doPlus(){
-		if (interval >= CountdownTimer.lowerLimit && interval < CountdownTimer.higherLimit){
+		if (interval >= lowerLimit && interval < higherLimit){
 		interval += plusTime;
 		}
 	}
@@ -133,7 +133,7 @@ public class CountdownTimer {
 	 * Must be between the two limits.
 	 */
 	static void doMinus(){
-		if (interval > CountdownTimer.lowerLimit && interval <= CountdownTimer.higherLimit){
+		if (interval > lowerLimit && interval <= higherLimit){
 			interval -= minusTime;
 		}
 	}
@@ -145,7 +145,7 @@ public class CountdownTimer {
 	 * Must be between the two limits.
 	 */
 	static void doPlus2(){
-		if (interval2 >= CountdownTimer.lowerLimit && interval2 < CountdownTimer.higherLimit){
+		if (interval2 >= lowerLimit && interval2 < higherLimit){
 		interval2 += plusTime;
 		}
 	}
@@ -155,24 +155,24 @@ public class CountdownTimer {
 	 * Must be between the two limits.
 	 */
 	static void doMinus2(){
-		if (interval2 > CountdownTimer.lowerLimit && interval2 <= CountdownTimer.higherLimit){
+		if (interval2 > lowerLimit && interval2 <= higherLimit){
 			interval2 -= minusTime;
 		}
 	}
 	
 	static void clearComments(){
 		//TODO: write javadoc
-		CountdownTimer.comments = "";
+		comments = "";
 	}
 	
 	static void addToComments(String c){
 		//TODO: write javadoc
-		if (CountdownTimer.comments.isEmpty()){
-			CountdownTimer.comments = c;
+		if (comments.isEmpty()){
+			comments = c;
 			return;
 		}
 		checkAndLimitUserComments();
-		CountdownTimer.comments = c + "<BR/>" + CountdownTimer.comments;
+		comments = c + "<BR/>" + comments;
 	}
 	
 	/**
