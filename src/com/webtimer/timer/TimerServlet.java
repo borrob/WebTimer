@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.webtimer.timer.CountdownTimer;
 
-@WebServlet("/timer")
+@WebServlet(urlPatterns = {"/Timer", "/timer"})
 public class TimerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

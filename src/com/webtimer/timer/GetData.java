@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.webtimer.timer.CountdownTimer;
 
 
-@WebServlet("/getData")
+@WebServlet(urlPatterns = {"/getData", "/getdata"})
 public class GetData extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

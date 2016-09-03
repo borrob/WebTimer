@@ -14,7 +14,7 @@ import com.webtimer.timer.CountdownTimer;
 /**
  * Servlet implementation class TimerAction
  */
-@WebServlet("/TimerAction")
+@WebServlet(urlPatterns = {"/TimerAction", "/timeraction"})
 public class TimerAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
