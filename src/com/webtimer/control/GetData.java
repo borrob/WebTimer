@@ -1,4 +1,4 @@
-package com.webtimer.timer;
+package com.webtimer.control;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

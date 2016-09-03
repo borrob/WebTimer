@@ -76,7 +76,7 @@ public class CountdownTimer {
 	/**
 	 * Start the timer and keep it going.
 	 */
-	boolean start(){
+	public boolean start(){
 		interval = this.DEFAULT_INTERVAL;
 		interval2 = this.DEFAULT_INTERVAL;
 		
@@ -99,7 +99,7 @@ public class CountdownTimer {
 	/**
 	 * Stop the timer.
 	 */
-	boolean stop(){
+	public boolean stop(){
 		timer.cancel();
 		isRunning=false;
 		return isRunning;
@@ -122,7 +122,7 @@ public class CountdownTimer {
 	 * Add a bit of extra time to the next timer.
 	 * Must be between the two limits.
 	 */
-	static void doPlus(){
+	public static void doPlus(){
 		if (interval >= lowerLimit && interval < higherLimit){
 		interval += plusTime;
 		}
@@ -132,7 +132,7 @@ public class CountdownTimer {
 	 * Subtract a bit of extra time from the next timer.
 	 * Must be between the two limits.
 	 */
-	static void doMinus(){
+	public static void doMinus(){
 		if (interval > lowerLimit && interval <= higherLimit){
 			interval -= minusTime;
 		}
@@ -144,7 +144,7 @@ public class CountdownTimer {
 	 * Add a bit of extra time to the next timer.
 	 * Must be between the two limits.
 	 */
-	static void doPlus2(){
+	public static void doPlus2(){
 		if (interval2 >= lowerLimit && interval2 < higherLimit){
 		interval2 += plusTime;
 		}
@@ -154,7 +154,7 @@ public class CountdownTimer {
 	 * Subtract a bit of extra time from the next timer.
 	 * Must be between the two limits.
 	 */
-	static void doMinus2(){
+	public static void doMinus2(){
 		if (interval2 > lowerLimit && interval2 <= higherLimit){
 			interval2 -= minusTime;
 		}
@@ -163,7 +163,7 @@ public class CountdownTimer {
 	/**
 	 * clear the user comments
 	 */
-	static void clearComments(){
+	public static void clearComments(){
 		comments = "";
 	}
 	
@@ -172,7 +172,7 @@ public class CountdownTimer {
 	 * 
 	 * @param c the user comment to add
 	 */
-	static void addToComments(String c){
+	public static void addToComments(String c){
 		if (comments.isEmpty()){
 			comments = c;
 			return;
