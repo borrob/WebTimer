@@ -3,6 +3,8 @@ package com.webtimer.timer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.log4j.Logger;
+
 public class CountdownTimer {
 
 	private Timer timer;
@@ -32,6 +34,8 @@ public class CountdownTimer {
 	private static int higherLimit = 120000;
 	
 	private static int maxLinesUserComments = 5;
+	
+	private static final Logger logger = Logger.getLogger(CountdownTimer.class);
 
 	//////////////////////////////////////////////////////////////////////////////////
 	
@@ -77,6 +81,7 @@ public class CountdownTimer {
 	 * Start the timer and keep it going.
 	 */
 	public boolean start(){
+		logger.info("Starting the timer.");
 		interval = this.DEFAULT_INTERVAL;
 		interval2 = this.DEFAULT_INTERVAL;
 		
@@ -86,7 +91,7 @@ public class CountdownTimer {
 					@Override
 					public void run(){
 						timeStep();
-						System.out.println("Timer is at: " + String.valueOf(countdown));
+						if (logger.isTraceEnabled()){logger.trace("Timer is at: " + String.valueOf(countdown));}
 					}
 				},
 				this.DELAY,
@@ -100,6 +105,7 @@ public class CountdownTimer {
 	 * Stop the timer.
 	 */
 	public boolean stop(){
+		logger.info("Stopping the timer.");
 		timer.cancel();
 		isRunning=false;
 		return isRunning;
@@ -122,9 +128,10 @@ public class CountdownTimer {
 	 * Add a bit of extra time to the next timer.
 	 * Must be between the two limits.
 	 */
-	public static void doPlus(){
+	public static void doPlus(){ 
 		if (interval >= lowerLimit && interval < higherLimit){
-		interval += plusTime;
+			if (logger.isDebugEnabled()){logger.debug("Added: " + String.valueOf(plusTime) + " to " + String.valueOf(interval) + " (interval).");}
+			interval += plusTime;
 		}
 	}
 	
@@ -134,6 +141,7 @@ public class CountdownTimer {
 	 */
 	public static void doMinus(){
 		if (interval > lowerLimit && interval <= higherLimit){
+			if (logger.isDebugEnabled()){logger.debug("Substracting: " + String.valueOf(minusTime) + " from " + String.valueOf(interval) + " (interval).");}
 			interval -= minusTime;
 		}
 	}
@@ -146,7 +154,8 @@ public class CountdownTimer {
 	 */
 	public static void doPlus2(){
 		if (interval2 >= lowerLimit && interval2 < higherLimit){
-		interval2 += plusTime;
+			if (logger.isDebugEnabled()){logger.debug("Added: " + String.valueOf(plusTime) + " to " + String.valueOf(interval2) + " (interval2).");}
+			interval2 += plusTime;
 		}
 	}
 	
@@ -156,6 +165,7 @@ public class CountdownTimer {
 	 */
 	public static void doMinus2(){
 		if (interval2 > lowerLimit && interval2 <= higherLimit){
+			if (logger.isDebugEnabled()){logger.debug("Substracting: " + String.valueOf(minusTime) + " from " + String.valueOf(interval2) + " (interval2).");}
 			interval2 -= minusTime;
 		}
 	}
@@ -164,6 +174,7 @@ public class CountdownTimer {
 	 * clear the user comments
 	 */
 	public static void clearComments(){
+		logger.debug("Clearing user comments.");
 		comments = "";
 	}
 	
@@ -173,6 +184,7 @@ public class CountdownTimer {
 	 * @param c the user comment to add
 	 */
 	public static void addToComments(String c){
+		if (logger.isDebugEnabled()){logger.debug("Adding user comment: " + c);}
 		if (comments.isEmpty()){
 			comments = c;
 			return;
@@ -193,6 +205,7 @@ public class CountdownTimer {
 	static private void checkAndLimitUserComments(){
 		String[] l_comments = comments.split("<BR/>");
 		if (l_comments.length > maxLinesUserComments -1 ){
+			logger.debug("Shortening user comments.");
 			comments = l_comments[maxLinesUserComments - 2];
 			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
 				comments = l_comments[i] + "<BR/>" + comments;

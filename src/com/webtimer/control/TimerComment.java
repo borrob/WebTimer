@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 /**
@@ -17,6 +19,7 @@ import com.webtimer.timer.CountdownTimer;
 @WebServlet(urlPatterns={"/TimerComment", "/timercomment"})
 public class TimerComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(TimerComment.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +42,7 @@ public class TimerComment extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameterMap().containsKey("userCommentInput")){
+			if (logger.isTraceEnabled()){logger.trace("Received a user comment: " + request.getParameter("userCommentInput"));}
 			CountdownTimer.addToComments(request.getParameter("userCommentInput"));
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");	

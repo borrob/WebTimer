@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 @WebServlet(urlPatterns = {"/Timer", "/timer"})
 public class TimerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private final static Logger logger = Logger.getLogger(TimerServlet.class);
 
 	private CountdownTimer cdt;
 
@@ -30,7 +33,7 @@ public class TimerServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		System.out.println("Starting up WebTimer");
+		logger.info("Starting up WebTimer !");
 		cdt = new CountdownTimer();
 		cdt.start();
 	}
@@ -40,6 +43,7 @@ public class TimerServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.trace("Received a get timer request.");
 		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
 		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
 		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
@@ -62,7 +66,7 @@ public class TimerServlet extends HttpServlet {
 	 */
 	@Override
 	public void destroy(){
-		System.out.println("Shutting down WebTimer");
+		logger.info("Shutting down WebTimer");
 		cdt.stop();
 	}
 

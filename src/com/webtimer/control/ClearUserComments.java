@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 /**
  * Servlet implementation class ClearUserComments
  */
-@WebServlet(urlPatterns = {"/ClearUserComments", "clearusercomments"})
+@WebServlet(urlPatterns = {"/ClearUserComments", "/clearusercomments"})
 public class ClearUserComments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(ClearUserComments.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,6 +33,7 @@ public class ClearUserComments extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.trace("Received clear user comments request.");
 		CountdownTimer.clearComments();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
 		dispatcher.forward(request,response);

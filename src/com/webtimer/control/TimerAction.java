@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 /**
@@ -17,6 +19,7 @@ import com.webtimer.timer.CountdownTimer;
 @WebServlet(urlPatterns = {"/TimerAction", "/timeraction"})
 public class TimerAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(TimerAction.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,6 +34,7 @@ public class TimerAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameterMap().containsKey("action")) {
 			String theAction = request.getParameter("action");
+			if (logger.isTraceEnabled()){logger.trace("Received timeraction request with action: " + theAction);}
 			switch (theAction) {
 				case "plus":	CountdownTimer.doPlus();
 								break;

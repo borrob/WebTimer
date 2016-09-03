@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 
@@ -14,6 +16,7 @@ import com.webtimer.timer.CountdownTimer;
 public class GetData extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(GetData.class);
 
     public GetData() {
     	super();
@@ -25,6 +28,7 @@ public class GetData extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.trace("Received a getdata request.");
 		response.setContentType("application/text;charset=UTF-8");
 		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()/1000));
 		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval()/1000));
