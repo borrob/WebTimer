@@ -15,6 +15,18 @@
 			out.println(Integer.parseInt("" + request.getAttribute("countdown"))/1000);
 			%>
 		</p>
+		<div>
+			<p id="userComments">
+			<%
+				out.println(request.getAttribute("userComments"));
+			%>
+			</p>
+			<form method="POST" action="TimerComment">
+				<label for="userCommentInput">Add comment:</label>
+				<input type="text" id="userCommentInput" name="userCommentInput" value="type..."/>
+				<button type="submit">COMMENT</button>
+			</form>
+		</div>
 		<h2>New timers</h2>
 
 		<div class="timerControl">

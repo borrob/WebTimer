@@ -29,6 +29,7 @@ public class GetData extends HttpServlet {
 		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()/1000));
 		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval()/1000));
 		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval2()/1000));
+		response.getWriter().append("_").append(CountdownTimer.getComments());
 	}
 
 }
