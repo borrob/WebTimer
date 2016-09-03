@@ -18,14 +18,14 @@ public class CountdownTimer {
 	private static String comments = "";
 	boolean isRunning = false;
 	
-	/*
+	/**
 	 * Default values to change the interval with.
 	 */
 	//Todo: move these to a conf file.
 	private static int plusTime = 10000;
 	private static int minusTime = 10000;
 	
-	/*
+	/**
 	 * The interval must be between <lowerLimit> and <higherLimit>
 	 */
 	private static int lowerLimit = 20000;
@@ -73,7 +73,7 @@ public class CountdownTimer {
 	
 	/*METHODS*/
 	
-	/*
+	/**
 	 * Start the timer and keep it going.
 	 */
 	boolean start(){
@@ -96,7 +96,7 @@ public class CountdownTimer {
 		return isRunning;
 	}
 
-	/*
+	/**
 	 * Stop the timer.
 	 */
 	boolean stop(){
@@ -105,7 +105,7 @@ public class CountdownTimer {
 		return isRunning;
 	}
 
-	/*
+	/**
 	 * Helper method to update the time left over in the current run.
 	 * Reset interval when it runs out.
 	 */
@@ -118,7 +118,7 @@ public class CountdownTimer {
 		countdown -= UPDATE_INTERVAL;
 	}
 	
-	/*
+	/**
 	 * Add a bit of extra time to the next timer.
 	 * Must be between the two limits.
 	 */
@@ -128,7 +128,7 @@ public class CountdownTimer {
 		}
 	}
 	
-	/*
+	/**
 	 * Subtract a bit of extra time from the next timer.
 	 * Must be between the two limits.
 	 */
@@ -140,7 +140,7 @@ public class CountdownTimer {
 	
 	//TODO: DRY-principle for interval2
 	
-	/*
+	/**
 	 * Add a bit of extra time to the next timer.
 	 * Must be between the two limits.
 	 */
@@ -150,7 +150,7 @@ public class CountdownTimer {
 		}
 	}
 	
-	/*
+	/**
 	 * Subtract a bit of extra time from the next timer.
 	 * Must be between the two limits.
 	 */
@@ -160,13 +160,19 @@ public class CountdownTimer {
 		}
 	}
 	
+	/**
+	 * clear the user comments
+	 */
 	static void clearComments(){
-		//TODO: write javadoc
 		comments = "";
 	}
 	
+	/**
+	 * add user comment
+	 * 
+	 * @param c the user comment to add
+	 */
 	static void addToComments(String c){
-		//TODO: write javadoc
 		if (comments.isEmpty()){
 			comments = c;
 			return;
@@ -194,4 +200,3 @@ public class CountdownTimer {
 		}
 	}
 }
-
