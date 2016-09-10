@@ -6,16 +6,6 @@ body {
 	font-family: sans-serif;
 }
 
-#countdowntimeparagraph {
-	text-align: center;
-	font-size: 500%;
-}
-
-#userComments {
-	text-align: left;
-	font-size: 125%;
-}
-
 .column {
 	width: 50%;
 	float: left;
@@ -36,4 +26,14 @@ body {
 
 .nextnext {
 	/*bump*/
+}
+
+#countdowntimeparagraph {
+	text-align: center;
+	font-size: 500%;
+}
+
+#userComments {
+	text-align: left;
+	font-size: 125%;
 }
