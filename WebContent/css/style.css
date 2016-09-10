@@ -10,6 +10,11 @@ body {
 	font-size: 500%;
 }
 
+#userComments {
+	text-align: left;
+	font-size: 125%;
+}
+
 .column {
 	width: 50%;
 	float: left;
