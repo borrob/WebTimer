@@ -42,7 +42,7 @@ public class CountdownTimer {
 	/* GETTER AND SETTERS */
 	
 	public static int getInterval() {
-		return interval;
+		return interval/1000;
 	}
 
 	public static void setInterval(int interval) {
@@ -50,7 +50,7 @@ public class CountdownTimer {
 	}
 	
 	public static int getInterval2() {
-		return interval2;
+		return interval2/1000;
 	}
 
 	public static void setInterval2(int interval) {
@@ -58,7 +58,7 @@ public class CountdownTimer {
 	}
 
 	public static int getCountdown() {
-		return countdown;
+		return countdown/1000;
 	}
 
 	public static void setCountdown(int countdown) {
