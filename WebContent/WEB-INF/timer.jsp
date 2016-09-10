@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="description" content="WebTimer is a tool for a musician and a live coder to keep contact and to interact with the audiance.">
+		<meta name="author" content="RVA van Loon - aka borrob & offzz">	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 		<link rel="stylesheet" href="css/style.css">
 		<script type="text/javascript" src="js/app.js"></script>
 		<title>WebTImer</title>
@@ -15,7 +17,7 @@
 			<div id="nextIntervalDiv" class="next">
 				<p>The next interval is: <span id="timersparagraph">
 					<%
-					out.println(request.getAttribute("next_interval"));
+						out.println(request.getAttribute("next_interval"));
 					%>
 				</span> seconds.</p>
 				<button id="plus" class="timerButton">+ 10 seconds</button><br/>
