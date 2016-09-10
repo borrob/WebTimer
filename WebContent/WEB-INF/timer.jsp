@@ -11,7 +11,7 @@
 	<body onload="init()">
 		<h1>WebTimer</h1>
 		<div class="column">
-			<div id = "nextIntervalDiv">
+			<div id="nextIntervalDiv" class="next">
 				<p>The next interval is: <span id="timersparagraph">
 					<%
 					out.println(request.getAttribute("next_interval"));
@@ -20,7 +20,7 @@
 				<button id="plus" class="timerButton">+ 10 seconds</button><br/>
 				<button id="minus" class="timerButton">- 10 seconds</button><br/>
 			</div>
-			<div id="nextnextIntervalDiv">
+			<div id="nextnextIntervalDiv" class="nextnext">
 				<p>The interval after that is: <span id="timersparagraph2">
 					<%
 						out.println(request.getAttribute("next_interval2"));
