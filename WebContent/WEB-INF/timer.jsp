@@ -23,7 +23,7 @@
 			<div id="nextnextIntervalDiv">
 				<p>The interval after that is: <span id="timersparagraph2">
 					<%
-					out.println(request.getAttribute("next_interval2"));
+						out.println(request.getAttribute("next_interval2"));
 					%>
 				</span> seconds.</p>
 				<button id="plus2" class="timerButton">+ 10 seconds</button><br/>
@@ -33,7 +33,7 @@
 		<div class="column">
 			<p id="countdowntimeparagraph">
 				<%
-				out.println(Integer.parseInt("" + request.getAttribute("countdown"))/1000);
+					out.println(Integer.parseInt("" + request.getAttribute("countdown")));
 				%>
 			</p>
 			<div>
