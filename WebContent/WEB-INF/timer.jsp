@@ -44,7 +44,7 @@
 				</p>
 				<form method="POST" action="TimerComment">
 					<label for="userCommentInput">Add comment:</label>
-					<input type="text" id="userCommentInput" name="userCommentInput" value="type..."/>
+					<input type="text" id="userCommentInput" name="userCommentInput" value=""/>
 					<button type="submit">COMMENT</button>
 				</form>
 			</div>
