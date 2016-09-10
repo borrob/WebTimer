@@ -28,3 +28,11 @@ a.timerControl {
 	text-decoration: none;
 	font-size: 300%;
 }
+
+.timerButton {
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

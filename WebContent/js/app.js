@@ -1,3 +1,13 @@
+function init(){
+	update();
+	var buttons = document.getElementsByClassName('timerButton');
+	for (var i = 0; i < buttons.length; i++){
+		buttons[i].addEventListener("click",function(e){
+			timerButtonClick(e.srcElement.id);
+		});
+	}
+}
+
 function update(){
 	//Get the new timer and next interval and put it on the page.
 	var xhttp = new XMLHttpRequest();
@@ -23,4 +33,8 @@ function update(){
 		  
 	  //repeat update after 1 sec
 	  setTimeout(function() { update(); }, 1000);
+}
+
+function timerButtonClick(buttonid){
+	location.href="TimerAction?action="+buttonid;
 }
