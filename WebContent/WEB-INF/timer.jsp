@@ -15,22 +15,22 @@
 		<h1>WebTimer</h1>
 		<div class="column">
 			<div id="nextIntervalDiv" class="next">
-				<p>The next interval is: <span id="timersparagraph">
+				<p>The next interval is: <span id="timersparagraph" class="intervalText">
 					<%
 						out.println(request.getAttribute("next_interval"));
 					%>
 				</span> seconds.</p>
-				<button id="plus" class="timerButton">+ 10 seconds</button><br/>
-				<button id="minus" class="timerButton">- 10 seconds</button><br/>
+				<button id="plus" class="timerButton">+ 10 sec</button><br/>
+				<button id="minus" class="timerButton">- 10 sec</button><br/>
 			</div>
 			<div id="nextnextIntervalDiv" class="nextnext">
-				<p>The interval after that is: <span id="timersparagraph2">
+				<p>The interval after that is: <span id="timersparagraph2" class="intervalText">
 					<%
 						out.println(request.getAttribute("next_interval2"));
 					%>
 				</span> seconds.</p>
-				<button id="plus2" class="timerButton">+ 10 seconds</button><br/>
-				<button id="minus2" class="timerButton">- 10 seconds</button><br/>
+				<button id="plus2" class="timerButton">+ 10 sec</button><br/>
+				<button id="minus2" class="timerButton">- 10 sec</button><br/>
 			</div>
 		</div>
 		<div class="column">
@@ -40,16 +40,16 @@
 				%>
 			</p>
 			<div>
-				<p id="userComments">
-				<%
-					out.println(request.getAttribute("userComments"));
-				%>
-				</p>
 				<form method="POST" action="TimerComment">
 					<label for="userCommentInput">Add comment:</label>
 					<input type="text" id="userCommentInput" name="userCommentInput" value=""/>
-					<button type="submit">COMMENT</button>
+					<button type="submit" id="commentButton">COMMENT</button>
 				</form>
+				<p id="userComments">
+					<%
+						out.println(request.getAttribute("userComments"));
+					%>
+				</p>
 			</div>
 		</div>
 

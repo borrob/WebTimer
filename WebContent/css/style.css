@@ -15,8 +15,8 @@ body {
 	width: 50%;
 	margin-left: 25%;
 	margin-right: 25%;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-size: 100%;
 }
 
@@ -28,12 +28,19 @@ body {
 	/*bump*/
 }
 
+.intervalText {
+	font-size:150%;
+}
+
 #countdowntimeparagraph {
 	text-align: center;
-	font-size: 500%;
+	font-size: 150%;
 }
 
 #userComments {
 	text-align: left;
-	font-size: 125%;
+}
+
+#commentButton {
+	padding: 20px;
 }
