@@ -44,6 +44,10 @@ public class CountdownTimer {
 	public static int getInterval() {
 		return interval;
 	}
+	
+	public static int getIntervalSec() {
+		return interval/1000;
+	}
 
 	public static void setInterval(int interval) {
 		CountdownTimer.interval = interval;
@@ -52,6 +56,10 @@ public class CountdownTimer {
 	public static int getInterval2() {
 		return interval2;
 	}
+	
+	public static int getInterval2Sec() {
+		return interval2/1000;
+	}
 
 	public static void setInterval2(int interval) {
 		CountdownTimer.interval2 = interval;
@@ -59,6 +67,10 @@ public class CountdownTimer {
 
 	public static int getCountdown() {
 		return countdown;
+	}
+	
+	public static int getCountdownSec() {
+		return countdown/1000;
 	}
 
 	public static void setCountdown(int countdown) {

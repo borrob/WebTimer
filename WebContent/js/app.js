@@ -1,3 +1,8 @@
+function init(){
+	update();
+	setupUI();
+}
+
 function update(){
 	//Get the new timer and next interval and put it on the page.
 	var xhttp = new XMLHttpRequest();
@@ -23,4 +28,21 @@ function update(){
 		  
 	  //repeat update after 1 sec
 	  setTimeout(function() { update(); }, 1000);
+}
+
+function setupUI(){
+	//add listeners to the buttons
+	var buttons = document.getElementsByClassName('timerButton');
+	for (var i = 0; i < buttons.length; i++){
+		buttons[i].addEventListener("click",function(e){
+			timerButtonClick(e.srcElement.id);
+		});
+	}
+	
+	//set focus to the user comment input text box
+	document.getElementById("userCommentInput").focus();
+}
+
+function timerButtonClick(buttonid){
+	location.href="TimerAction?action="+buttonid;
 }
