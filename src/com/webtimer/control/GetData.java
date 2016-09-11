@@ -30,9 +30,9 @@ public class GetData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.trace("Received a getdata request.");
 		response.setContentType("application/text;charset=UTF-8");
-		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()));
-		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval()));
-		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval2()));
+		response.getWriter().append(String.valueOf(CountdownTimer.getCountdownSec()));
+		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getIntervalSec()));
+		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval2Sec()));
 		response.getWriter().append("_").append(CountdownTimer.getComments());
 	}
 
