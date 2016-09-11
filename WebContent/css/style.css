@@ -6,6 +6,10 @@ body {
 	font-family: sans-serif;
 }
 
+a:visited {
+	color: white;
+}
+
 .column {
 	width: 50%;
 	float: left;
