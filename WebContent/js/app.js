@@ -17,9 +17,9 @@ function update(){
 			//change background color when count down is reached
 			var countdown = parseInt(data[0]);
 			if (countdown <= 0) {
-				document.body.style.backgroundColor = "green";
+				flash();
 			} else {
-				document.body.style.backgroundColor = "red";
+				document.body.style.backgroundColor = "green";
 			}
 	    }
 	  };
@@ -28,6 +28,22 @@ function update(){
 		  
 	  //repeat update after 1 sec
 	  setTimeout(function() { update(); }, 1000);
+}
+
+function flash(){
+	document.body.style.backgroundColor = "red";
+	setTimeout(function(){
+		document.body.style.backgroundColor = "green";
+		setTimeout(function(){
+			document.body.style.backgroundColor = "red";
+			setTimeout(function(){
+				document.body.style.backgroundColor = "green";
+				setTimeout(function(){
+					document.body.style.backgroundColor = "red";
+				}, 200);
+			}, 200);
+		}, 200);
+	}, 200);
 }
 
 function setupUI(){
