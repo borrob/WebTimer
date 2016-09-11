@@ -43,4 +43,9 @@
     	<version>1.2.17</version>
 	</dependency>
   </dependencies>
+  <scm>
+  	<url>https://github.com/borrob/WebTimer</url>
+  	<developerConnection>borrob</developerConnection>
+  	<connection>git@github.com:borrob/WebTimer.git</connection>
+  </scm>
 </project>
