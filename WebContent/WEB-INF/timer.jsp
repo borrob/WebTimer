@@ -3,49 +3,55 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="description" content="WebTimer is a tool for a musician and a live coder to keep contact and to interact with the audiance.">
+		<meta name="author" content="RVA van Loon - aka borrob & offzz">	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 		<link rel="stylesheet" href="css/style.css">
 		<script type="text/javascript" src="js/app.js"></script>
 		<title>WebTImer</title>
 	</head>
-	<body onload="update()">
+	<body onload="init()">
 		<h1>WebTimer</h1>
-		<p id="countdowntimeparagraph">
-			<%
-			out.println(Integer.parseInt("" + request.getAttribute("countdown"))/1000);
-			%>
-		</p>
-		<div>
-			<p id="userComments">
-			<%
-				out.println(request.getAttribute("userComments"));
-			%>
-			</p>
-			<form method="POST" action="TimerComment">
-				<label for="userCommentInput">Add comment:</label>
-				<input type="text" id="userCommentInput" name="userCommentInput" value="type..."/>
-				<button type="submit">COMMENT</button>
-			</form>
+		<div class="column">
+			<div id="nextIntervalDiv" class="next">
+				<p>The next interval is: <span id="timersparagraph" class="intervalText">
+					<%
+						out.println(request.getAttribute("next_interval"));
+					%>
+				</span> seconds.</p>
+				<button id="plus" class="timerButton">+ 10 sec</button><br/>
+				<button id="minus" class="timerButton">- 10 sec</button><br/>
+			</div>
+			<div id="nextnextIntervalDiv" class="nextnext">
+				<p>The interval after that is: <span id="timersparagraph2" class="intervalText">
+					<%
+						out.println(request.getAttribute("next_interval2"));
+					%>
+				</span> seconds.</p>
+				<button id="plus2" class="timerButton">+ 10 sec</button><br/>
+				<button id="minus2" class="timerButton">- 10 sec</button><br/>
+			</div>
 		</div>
-		<h2>New timers</h2>
+		<div class="column">
+			<p id="countdowntimeparagraph">
+				<%
+					out.println(Integer.parseInt("" + request.getAttribute("countdown")));
+				%>
+			</p>
+			<div>
+				<form method="POST" action="TimerComment">
+					<label for="userCommentInput">Add comment:</label>
+					<input type="text" id="userCommentInput" name="userCommentInput" value=""/>
+					<button type="submit" id="commentButton">COMMENT</button>
+				</form>
+				<p id="userComments">
+					<%
+						out.println(request.getAttribute("userComments"));
+					%>
+				</p>
+			</div>
+		</div>
 
-		<div class="timerControl">
-			<p id="timersparagraph">
-				<%
-				out.println(request.getAttribute("next_interval"));
-				%>
-			</p>
-			<div class="timerControlBox"><a href="TimerAction?action=plus" class="timerControl">+++</a></div>
-			<div class="timerControlBox"><a href="TimerAction?action=minus" class="timerControl">---</a></div>
-		</div>
-		<div class="timerControl">
-			<p id="timersparagraph2">
-				<%
-				out.println(request.getAttribute("next_interval2"));
-				%>
-			</p>
-			<div class="timerControlBox"><a href="TimerAction?action=plus2" class="timerControl">+++</a></div>
-			<div class="timerControlBox"><a href="TimerAction?action=minus2" class="timerControl">---</a></div>
-		</div>
 	</body>
 </html>
