@@ -26,10 +26,15 @@ a:visited {
 
 .next {
 	font-size: 150%;
+	background-color: rgba(100,100,100,0.1);
+	padding: 10px;
+	maring: 10px;
 }
 
 .nextnext {
-	/*bump*/
+	background-color: rgba(100,100,100,0.1);
+	padding: 10px;
+	maring: 10px;
 }
 
 .intervalText {
@@ -43,6 +48,9 @@ a:visited {
 
 #userComments {
 	text-align: left;
+	background-color: rgba(100,100,100,0.1);
+	padding: 10px;
+	maring: 10px;
 }
 
 #commentButton {
