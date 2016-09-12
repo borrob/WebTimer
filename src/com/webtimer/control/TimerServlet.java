@@ -34,6 +34,8 @@ public class TimerServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		logger.info("Starting up WebTimer !");
+		//String test= getServletContext().getInitParameter("token");
+		//logger.info(test);
 		cdt = new CountdownTimer();
 		cdt.start();
 	}
