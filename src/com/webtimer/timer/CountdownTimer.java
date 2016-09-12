@@ -1,5 +1,6 @@
 package com.webtimer.timer;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,8 +15,10 @@ public class CountdownTimer {
 
 	private final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
 	
-	private static int interval;
-	private static int interval2;
+	private static int interval = 90*1000;
+	private static int interval2 = 90*1000;
+	private static List<Integer> anneTimes;
+	
 	private static int countdown = 3000; //the time left over in the current interval
 	private static String comments = "";
 	boolean isRunning = false;
@@ -64,6 +67,17 @@ public class CountdownTimer {
 	public static void setInterval2(int interval) {
 		CountdownTimer.interval2 = interval;
 	}
+	
+	public static List<Integer> getAnneTimes() {
+		return anneTimes;
+	}
+
+	public static void setAnneTimes(List<Integer> anneTimes) {
+		CountdownTimer.anneTimes = anneTimes;
+		CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
+		CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
+		CountdownTimer.setCountdown(3);
+	}
 
 	public static int getCountdown() {
 		return countdown;
@@ -94,8 +108,6 @@ public class CountdownTimer {
 	 */
 	public boolean start(){
 		logger.info("Starting the timer.");
-		interval = this.DEFAULT_INTERVAL;
-		interval2 = this.DEFAULT_INTERVAL;
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
@@ -131,7 +143,11 @@ public class CountdownTimer {
 		if (countdown <= 0){
 			countdown = interval;
 			interval = interval2;
-			interval2 = this.DEFAULT_INTERVAL;
+			if (anneTimes != null && !anneTimes.isEmpty()){
+				interval2 = anneTimes.remove(0);
+			} else {
+				interval2 = DEFAULT_INTERVAL;
+			}
 		}
 		countdown -= UPDATE_INTERVAL;
 	}
