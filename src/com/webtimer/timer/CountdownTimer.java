@@ -13,10 +13,10 @@ public class CountdownTimer {
 	private final int DELAY = 0;
 	private final int UPDATE_INTERVAL = 1000;
 
-	private final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
+	private static final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
 	
-	private static int interval = 90*1000;
-	private static int interval2 = 90*1000;
+	private static int interval;
+	private static int interval2;
 	private static List<Integer> anneTimes;
 	
 	private static int countdown = 3000; //the time left over in the current interval
@@ -73,10 +73,13 @@ public class CountdownTimer {
 	}
 
 	public static void setAnneTimes(List<Integer> anneTimes) {
-		CountdownTimer.anneTimes = anneTimes;
-		CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
-		CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
-		CountdownTimer.setCountdown(3);
+		if (anneTimes.size()>2){
+			CountdownTimer.anneTimes = anneTimes;
+			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
+			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
+			CountdownTimer.setCountdown(3000);
+			logger.debug("anneTimes and the intervals are set!");
+		}
 	}
 
 	public static int getCountdown() {
@@ -108,6 +111,8 @@ public class CountdownTimer {
 	 */
 	public boolean start(){
 		logger.info("Starting the timer.");
+		
+		setTheIntervals();
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
@@ -238,6 +243,18 @@ public class CountdownTimer {
 			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
 				comments = l_comments[i] + "<BR/>" + comments;
 			}
+		}
+	}
+	
+	static private void setTheIntervals(){
+		//TODO: write javadoc
+		if (anneTimes != null && anneTimes.size()>2){
+			interval = anneTimes.remove(0);
+			interval2 = anneTimes.remove(0);
+		} else {
+			interval = DEFAULT_INTERVAL;
+			interval2 = DEFAULT_INTERVAL;
+			
 		}
 	}
 }
