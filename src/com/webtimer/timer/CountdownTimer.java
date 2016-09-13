@@ -92,10 +92,6 @@ public class CountdownTimer {
 		CountdownTimer.comments = c;
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////
-	
-	/*METHODS*/
-	
 	public static int getPlusTime() {
 		return plusTime;
 	}
@@ -135,14 +131,18 @@ public class CountdownTimer {
 	public static void setMaxLinesUserComments(int maxLinesUserComments) {
 		CountdownTimer.maxLinesUserComments = maxLinesUserComments;
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	
+	/*METHODS*/
 
 	/**
 	 * Start the timer and keep it going.
 	 */
 	public boolean start(){
 		logger.info("Starting the timer.");
-		interval = this.defaultInterval;
-		interval2 = this.defaultInterval;
+		interval = CountdownTimer.defaultInterval;
+		interval2 = CountdownTimer.defaultInterval;
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
@@ -178,7 +178,7 @@ public class CountdownTimer {
 		if (countdown <= 0){
 			countdown = interval;
 			interval = interval2;
-			interval2 = this.defaultInterval;
+			interval2 = CountdownTimer.defaultInterval;
 		}
 		countdown -= UPDATE_INTERVAL;
 	}
