@@ -246,8 +246,10 @@ public class CountdownTimer {
 		}
 	}
 	
+	/**
+	 * Set the interval and interval2 to either the first two times of anneTimes or the defatult.
+	 */
 	static private void setTheIntervals(){
-		//TODO: write javadoc
 		if (anneTimes != null && anneTimes.size()>2){
 			interval = anneTimes.remove(0);
 			interval2 = anneTimes.remove(0);
