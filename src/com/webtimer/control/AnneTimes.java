@@ -32,12 +32,8 @@ public class AnneTimes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> anneTimes = new ArrayList<Integer>();
-		anneTimes = new ArrayList<Integer>();
-		for (int q = 120; q>=10; q-=10){
-			anneTimes.add(q*1000);
-		}
-		CountdownTimer.setAnneTimes(anneTimes);
+		
+		CountdownTimer.setAnneTimes(getTimes());
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
 		dispatcher.forward(request,response);
 	}
@@ -48,6 +44,15 @@ public class AnneTimes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO: get list of times to add and push that to CountdownTimer.class
 		doGet(request, response);
+	}
+	
+	private List<Integer> getTimes(){
+		List<Integer> theTimes = new ArrayList<Integer>();
+		theTimes = new ArrayList<Integer>();
+		for (int q = 120; q>=10; q-=10){
+			theTimes.add(q*1000);
+		}
+		return theTimes;
 	}
 
 }
