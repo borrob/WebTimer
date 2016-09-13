@@ -12,28 +12,27 @@ public class CountdownTimer {
 	private final int DELAY = 0;
 	private final int UPDATE_INTERVAL = 1000;
 
-	private final int DEFAULT_INTERVAL = 90000; //the countdown interval - default: 90 seconds
+	private static int defaultInterval;
 	
 	private static int interval;
 	private static int interval2;
-	private static int countdown = 3000; //the time left over in the current interval
+	private static int countdown;
 	private static String comments = "";
 	boolean isRunning = false;
 	
 	/**
 	 * Default values to change the interval with.
 	 */
-	//Todo: move these to a conf file.
-	private static int plusTime = 10000;
-	private static int minusTime = 10000;
+	private static int plusTime;
+	private static int minusTime;
 	
 	/**
 	 * The interval must be between <lowerLimit> and <higherLimit>
 	 */
-	private static int lowerLimit = 20000;
-	private static int higherLimit = 120000;
+	private static int lowerLimit;
+	private static int higherLimit;
 	
-	private static int maxLinesUserComments = 5;
+	private static int maxLinesUserComments;
 	
 	private static final Logger logger = Logger.getLogger(CountdownTimer.class);
 
@@ -41,6 +40,14 @@ public class CountdownTimer {
 	
 	/* GETTER AND SETTERS */
 	
+	public int getDefaultInterval() {
+		return defaultInterval;
+	}
+	
+	public static void setDefaultInterval(int defaultInterval) {
+		CountdownTimer.defaultInterval = defaultInterval;
+	}
+
 	public static int getInterval() {
 		return interval;
 	}
@@ -89,13 +96,53 @@ public class CountdownTimer {
 	
 	/*METHODS*/
 	
+	public static int getPlusTime() {
+		return plusTime;
+	}
+
+	public static void setPlusTime(int plusTime) {
+		CountdownTimer.plusTime = plusTime;
+	}
+
+	public static int getMinusTime() {
+		return minusTime;
+	}
+
+	public static void setMinusTime(int minusTime) {
+		CountdownTimer.minusTime = minusTime;
+	}
+
+	public static int getLowerLimit() {
+		return lowerLimit;
+	}
+
+	public static void setLowerLimit(int lowerLimit) {
+		CountdownTimer.lowerLimit = lowerLimit;
+	}
+
+	public static int getHigherLimit() {
+		return higherLimit;
+	}
+
+	public static void setHigherLimit(int higherLimit) {
+		CountdownTimer.higherLimit = higherLimit;
+	}
+
+	public static int getMaxLinesUserComments() {
+		return maxLinesUserComments;
+	}
+
+	public static void setMaxLinesUserComments(int maxLinesUserComments) {
+		CountdownTimer.maxLinesUserComments = maxLinesUserComments;
+	}
+
 	/**
 	 * Start the timer and keep it going.
 	 */
 	public boolean start(){
 		logger.info("Starting the timer.");
-		interval = this.DEFAULT_INTERVAL;
-		interval2 = this.DEFAULT_INTERVAL;
+		interval = this.defaultInterval;
+		interval2 = this.defaultInterval;
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
@@ -131,7 +178,7 @@ public class CountdownTimer {
 		if (countdown <= 0){
 			countdown = interval;
 			interval = interval2;
-			interval2 = this.DEFAULT_INTERVAL;
+			interval2 = this.defaultInterval;
 		}
 		countdown -= UPDATE_INTERVAL;
 	}
