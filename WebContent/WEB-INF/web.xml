@@ -5,7 +5,31 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   <context-param>
-  	<param-name>token</param-name>
-  	<param-value>param-value</param-value>
+  	<param-name>default_interval</param-name>
+  	<param-value>90000</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>initial_countdown</param-name>
+  	<param-value>3000</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>plus_time</param-name>
+  	<param-value>10000</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>minus_time</param-name>
+  	<param-value>10000</param-value>
+  </context-param>
+    <context-param>
+  	<param-name>lower_limit</param-name>
+  	<param-value>20000</param-value>
+  </context-param>
+    <context-param>
+  	<param-name>higher_limit</param-name>
+  	<param-value>120000</param-value>
+  </context-param>
+      <context-param>
+  	<param-name>max_lines_user_comments</param-name>
+  	<param-value>5</param-value>
   </context-param>
 </web-app>
