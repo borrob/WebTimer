@@ -32,8 +32,22 @@ public class AnneTimes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!CountdownTimer.isRunning){
+			CountdownTimer cdt = new CountdownTimer();
+			cdt.start();
+		}
 		
-		CountdownTimer.setAnneTimes(getTimes());
+		if (request.getParameterMap().containsKey("style")){
+			String style = request.getParameter("style");
+			switch(style) {
+				case "120down":
+					CountdownTimer.setAnneTimes(getTimes120down());
+					break;
+				case "11times75":
+					CountdownTimer.setAnneTimes(getTimes11_75());
+					break;
+			}
+		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
 		dispatcher.forward(request,response);
 	}
@@ -46,11 +60,20 @@ public class AnneTimes extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private List<Integer> getTimes(){
+	private List<Integer> getTimes120down(){
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 120; q>=10; q-=10){
 			theTimes.add(q*1000);
+		}
+		return theTimes;
+	}
+	
+	private List<Integer> getTimes11_75(){
+		List<Integer> theTimes = new ArrayList<Integer>();
+		theTimes = new ArrayList<Integer>();
+		for (int q = 1; q<=11; q++){
+			theTimes.add(75*1000);
 		}
 		return theTimes;
 	}

@@ -18,10 +18,11 @@ public class CountdownTimer {
 	private static int interval;
 	private static int interval2;
 	private static List<Integer> anneTimes;
+	private static boolean useAnneTimes = false;
 	
 	private static int countdown = 3000; //the time left over in the current interval
 	private static String comments = "";
-	boolean isRunning = false;
+	public static boolean isRunning = false;
 	
 	/**
 	 * Default values to change the interval with.
@@ -78,7 +79,15 @@ public class CountdownTimer {
 			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
 			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
 			CountdownTimer.setCountdown(3000);
+			CountdownTimer.useAnneTimes=true;
 			logger.debug("anneTimes and the intervals are set!");
+			logger.debug("Interval: " + String.valueOf(CountdownTimer.interval));
+			logger.debug("Interval2: " + String.valueOf(CountdownTimer.interval));
+			logger.debug("Countdown: " + String.valueOf(CountdownTimer.countdown));
+			if (!CountdownTimer.isRunning){
+				CountdownTimer cdt = new CountdownTimer();
+				cdt.start();
+			}
 		}
 	}
 
@@ -137,6 +146,8 @@ public class CountdownTimer {
 		logger.info("Stopping the timer.");
 		timer.cancel();
 		isRunning=false;
+		useAnneTimes=false;
+		anneTimes = null;
 		return isRunning;
 	}
 
@@ -145,16 +156,31 @@ public class CountdownTimer {
 	 * Reset interval when it runs out.
 	 */
 	private void timeStep(){
-		if (countdown <= 0){
-			countdown = interval;
-			interval = interval2;
-			if (anneTimes != null && !anneTimes.isEmpty()){
-				interval2 = anneTimes.remove(0);
-			} else {
+		if(CountdownTimer.isRunning){
+		if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
+		if (CountdownTimer.useAnneTimes){
+			if (countdown <= 0){
+				if (interval==999999){
+					this.stop();
+					return;
+				}
+				countdown = interval;
+				interval = interval2;
+				if (!anneTimes.isEmpty()){
+					interval2 = anneTimes.remove(0);
+				} else {
+					interval2 = 999999;
+				}
+			}
+		} else {
+			if (countdown <= 0){
+				countdown = interval;
+				interval = interval2;
 				interval2 = DEFAULT_INTERVAL;
 			}
 		}
 		countdown -= UPDATE_INTERVAL;
+		}
 	}
 	
 	/**

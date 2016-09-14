@@ -1,6 +1,9 @@
+var alreadyFlashed;
+
 function init(){
 	update();
 	setupUI();
+	alreadyFlashed = false;
 }
 
 function update(){
@@ -16,10 +19,21 @@ function update(){
 			
 			//change background color when count down is reached
 			var countdown = parseInt(data[0]);
-			if (countdown <= 0) {
-				flash();
-			} else {
+			var interval = parseInt(data[1]);
+			var interval2 = parseInt(data[2]);
+			showOrHideInterval(interval!=999);
+			showOrHideInterval2(interval2!=999);
+			if (countdown > 0 || alreadyFlashed){
 				document.body.style.backgroundColor = "green";
+				if (alreadyFlashed){
+					document.body.style.backgroundColor = "red"
+				}
+			}
+			else {
+				flash();
+				if (interval == 999){
+					alreadyFlashed=true;;
+				}
 			}
 	    }
 	  };
@@ -61,4 +75,12 @@ function setupUI(){
 
 function timerButtonClick(buttonid){
 	location.href="TimerAction?action="+buttonid;
+}
+
+function showOrHideInterval(show){
+	document.getElementById("nextIntervalDiv").hidden=!show;
+}
+
+function showOrHideInterval2(show){
+	document.getElementById("nextnextIntervalDiv").hidden=!show;
 }

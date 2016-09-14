@@ -34,8 +34,10 @@ public class TimerServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		logger.info("Starting up WebTimer !");
-		cdt = new CountdownTimer();
-		cdt.start();
+		if (!CountdownTimer.isRunning){
+			CountdownTimer cdt = new CountdownTimer();
+			cdt.start();
+		}
 	}
 
 	/*
