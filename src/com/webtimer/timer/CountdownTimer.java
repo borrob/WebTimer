@@ -81,9 +81,7 @@ public class CountdownTimer {
 			CountdownTimer.setCountdown(3000);
 			CountdownTimer.useAnneTimes=true;
 			logger.debug("anneTimes and the intervals are set!");
-			logger.debug("Interval: " + String.valueOf(CountdownTimer.interval));
-			logger.debug("Interval2: " + String.valueOf(CountdownTimer.interval));
-			logger.debug("Countdown: " + String.valueOf(CountdownTimer.countdown));
+			
 			if (!CountdownTimer.isRunning){
 				CountdownTimer cdt = new CountdownTimer();
 				cdt.start();

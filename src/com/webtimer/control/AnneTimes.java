@@ -61,6 +61,7 @@ public class AnneTimes extends HttpServlet {
 	}
 	
 	private List<Integer> getTimes120down(){
+		//TODO: write javadoc
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 120; q>=10; q-=10){
@@ -70,6 +71,7 @@ public class AnneTimes extends HttpServlet {
 	}
 	
 	private List<Integer> getTimes11_75(){
+		//TODO: write javadoc
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 1; q<=11; q++){
