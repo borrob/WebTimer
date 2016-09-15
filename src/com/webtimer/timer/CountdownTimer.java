@@ -1,5 +1,6 @@
 package com.webtimer.timer;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,9 +17,12 @@ public class CountdownTimer {
 	
 	private static int interval;
 	private static int interval2;
-	private static int countdown;
+	private static List<Integer> anneTimes;
+	private static boolean useAnneTimes = false;
+	
+	private static int countdown = 3000; //the time left over in the current interval
 	private static String comments = "";
-	boolean isRunning = false;
+	public static boolean isRunning = false;
 	
 	/**
 	 * Default values to change the interval with.
@@ -70,6 +74,26 @@ public class CountdownTimer {
 
 	public static void setInterval2(int interval) {
 		CountdownTimer.interval2 = interval;
+	}
+	
+	public static List<Integer> getAnneTimes() {
+		return anneTimes;
+	}
+
+	public static void setAnneTimes(List<Integer> anneTimes) {
+		if (anneTimes.size()>2){
+			CountdownTimer.anneTimes = anneTimes;
+			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
+			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
+			CountdownTimer.setCountdown(3000);
+			CountdownTimer.useAnneTimes=true;
+			logger.debug("anneTimes and the intervals are set!");
+			
+			if (!CountdownTimer.isRunning){
+				CountdownTimer cdt = new CountdownTimer();
+				cdt.start();
+			}
+		}
 	}
 
 	public static int getCountdown() {
@@ -141,8 +165,8 @@ public class CountdownTimer {
 	 */
 	public boolean start(){
 		logger.info("Starting the timer.");
-		interval = CountdownTimer.defaultInterval;
-		interval2 = CountdownTimer.defaultInterval;
+		
+		setTheIntervals();
 		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(
@@ -167,6 +191,8 @@ public class CountdownTimer {
 		logger.info("Stopping the timer.");
 		timer.cancel();
 		isRunning=false;
+		useAnneTimes=false;
+		anneTimes = null;
 		return isRunning;
 	}
 
@@ -175,12 +201,33 @@ public class CountdownTimer {
 	 * Reset interval when it runs out.
 	 */
 	private void timeStep(){
-		if (countdown <= 0){
-			countdown = interval;
-			interval = interval2;
-			interval2 = CountdownTimer.defaultInterval;
+		if(CountdownTimer.isRunning){
+			
+			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
+			
+			if (CountdownTimer.useAnneTimes){
+				if (countdown <= 0){ //timer ran out
+					if (interval==999999){ //this must have been the last countdown of this set, because interval=999999
+						this.stop();
+						return;
+					}
+					countdown = interval;
+					interval = interval2;
+					if (!anneTimes.isEmpty()){ //go to the next interval in the list
+						interval2 = anneTimes.remove(0);
+					} else { //list ran out --> set indicator for end of list
+						interval2 = 999999;
+					}
+				}
+			} else { //not using anneTimes --> keep using the default interval
+				if (countdown <= 0){
+					countdown = interval;
+					interval = interval2;
+					interval2 = defaultInterval;
+				}
+			}
+			countdown -= UPDATE_INTERVAL;
 		}
-		countdown -= UPDATE_INTERVAL;
 	}
 	
 	/**
@@ -269,6 +316,20 @@ public class CountdownTimer {
 			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
 				comments = l_comments[i] + "<BR/>" + comments;
 			}
+		}
+	}
+	
+	/**
+	 * Set the interval and interval2 to either the first two times of anneTimes or the defatult.
+	 */
+	static private void setTheIntervals(){
+		if (anneTimes != null && anneTimes.size()>2){
+			interval = anneTimes.remove(0);
+			interval2 = anneTimes.remove(0);
+		} else {
+			interval = defaultInterval;
+			interval2 = defaultInterval;
+			
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class TimerAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameterMap().containsKey("action")) {
 			String theAction = request.getParameter("action");
-			if (logger.isTraceEnabled()){logger.trace("Received timeraction request with action: " + theAction);}
+			if (logger.isDebugEnabled()){logger.debug("Received timeraction request with action: " + theAction);}
 			switch (theAction) {
 				case "plus":	CountdownTimer.doPlus();
 								break;
