@@ -49,8 +49,11 @@ public class AnneTimes extends HttpServlet {
 					break;
 				case "11times75":
 					logger.debug("Setting the intervals to 11 x 75 seconds.");
-					CountdownTimer.setAnneTimes(getTimes11_75());
+					CountdownTimer.setAnneTimes(getTimesN_T(11, 75));
 					break;
+				case "testing":
+					logger.debug("Setting the intervals for testing purposes");
+					CountdownTimer.setAnneTimes(getTimesN_T(3, 5));
 			}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
@@ -84,17 +87,18 @@ public class AnneTimes extends HttpServlet {
 	/**
 	 * Get a list of integers for the count down timer intervals
 	 * 
-	 * This list contains 11 times 75 seconds.
+	 * This list contains n times t seconds.
 	 *  
+	 * @param n number of times the interval should return
+	 * @param t the interval in seconds
 	 * @return a list of integers with the time interval countdowns
 	 */
-	private List<Integer> getTimes11_75(){
+	private List<Integer> getTimesN_T(int n, int t){
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
-		for (int q = 1; q<=11; q++){
-			theTimes.add(75*1000);
+		for (int q = 1; q<=n; q++){
+			theTimes.add(t*1000);
 		}
 		return theTimes;
 	}
-
 }
