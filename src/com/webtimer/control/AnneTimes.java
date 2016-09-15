@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.webtimer.timer.CountdownTimer;
 
 /**
@@ -19,6 +21,7 @@ import com.webtimer.timer.CountdownTimer;
 @WebServlet({ "/AnneTimes", "/annetimes" })
 public class AnneTimes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(AnneTimes.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,9 +44,11 @@ public class AnneTimes extends HttpServlet {
 			String style = request.getParameter("style");
 			switch(style) {
 				case "120down":
+					logger.debug("Setting the intervals to 120, 110, ... 10;");
 					CountdownTimer.setAnneTimes(getTimes120down());
 					break;
 				case "11times75":
+					logger.debug("Setting the intervals to 11 x 75 seconds.");
 					CountdownTimer.setAnneTimes(getTimes11_75());
 					break;
 			}
@@ -60,8 +65,14 @@ public class AnneTimes extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
+	 * Get a list of integers for the count down timer intervals
+	 * 
+	 * This list starts at 120 seconds, 110, 100, ... 10 seconds.
+	 *  
+	 * @return a list of integers with the time interval countdowns
+	 */
 	private List<Integer> getTimes120down(){
-		//TODO: write javadoc
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 120; q>=10; q-=10){
@@ -70,8 +81,14 @@ public class AnneTimes extends HttpServlet {
 		return theTimes;
 	}
 	
+	/**
+	 * Get a list of integers for the count down timer intervals
+	 * 
+	 * This list contains 11 times 75 seconds.
+	 *  
+	 * @return a list of integers with the time interval countdowns
+	 */
 	private List<Integer> getTimes11_75(){
-		//TODO: write javadoc
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 1; q<=11; q++){

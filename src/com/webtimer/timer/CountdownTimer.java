@@ -155,29 +155,31 @@ public class CountdownTimer {
 	 */
 	private void timeStep(){
 		if(CountdownTimer.isRunning){
-		if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
-		if (CountdownTimer.useAnneTimes){
-			if (countdown <= 0){
-				if (interval==999999){
-					this.stop();
-					return;
+			
+			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
+			
+			if (CountdownTimer.useAnneTimes){
+				if (countdown <= 0){ //timer ran out
+					if (interval==999999){ //this must have been the last countdown of this set, because interval=999999
+						this.stop();
+						return;
+					}
+					countdown = interval;
+					interval = interval2;
+					if (!anneTimes.isEmpty()){ //go to the next interval in the list
+						interval2 = anneTimes.remove(0);
+					} else { //list ran out --> set indicator for end of list
+						interval2 = 999999;
+					}
 				}
-				countdown = interval;
-				interval = interval2;
-				if (!anneTimes.isEmpty()){
-					interval2 = anneTimes.remove(0);
-				} else {
-					interval2 = 999999;
+			} else { //not using anneTimes --> keep using the default interval
+				if (countdown <= 0){
+					countdown = interval;
+					interval = interval2;
+					interval2 = DEFAULT_INTERVAL;
 				}
 			}
-		} else {
-			if (countdown <= 0){
-				countdown = interval;
-				interval = interval2;
-				interval2 = DEFAULT_INTERVAL;
-			}
-		}
-		countdown -= UPDATE_INTERVAL;
+			countdown -= UPDATE_INTERVAL;
 		}
 	}
 	
