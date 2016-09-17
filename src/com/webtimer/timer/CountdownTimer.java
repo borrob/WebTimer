@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 public class CountdownTimer {
 
-	private Timer timer;
+	private static Timer timer;
 
 	private final int DELAY = 0;
 	private final int UPDATE_INTERVAL = 1;
@@ -181,6 +181,9 @@ public class CountdownTimer {
 		isRunning=false;
 		useAnneTimes=false;
 		anneTimes = null;
+		interval = defaultInterval;
+		interval2 = defaultInterval;
+		countdown = 3;
 		return isRunning;
 	}
 
@@ -311,7 +314,7 @@ public class CountdownTimer {
 	 * Set the interval and interval2 to either the first two times of anneTimes or the defatult.
 	 */
 	static private void setTheIntervals(){
-		if (anneTimes != null && anneTimes.size()>2){
+		if (CountdownTimer.useAnneTimes && anneTimes != null && anneTimes.size()>2){
 			interval = anneTimes.remove(0);
 			interval2 = anneTimes.remove(0);
 		} else {

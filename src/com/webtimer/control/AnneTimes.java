@@ -51,6 +51,16 @@ public class AnneTimes extends HttpServlet {
 					logger.debug("Setting the intervals to 11 x 75 seconds.");
 					CountdownTimer.setAnneTimes(getTimesN_T(11, 75));
 					break;
+				case "reset":
+					logger.debug("Resetting the timer.");
+					CountdownTimer cdt = new CountdownTimer();
+					if (CountdownTimer.isRunning){
+						cdt.stop();
+						cdt.start();
+					} else {
+						cdt.start();
+					}
+					break;
 				case "testing":
 					logger.debug("Setting the intervals for testing purposes");
 					CountdownTimer.setAnneTimes(getTimesN_T(3, 5));
