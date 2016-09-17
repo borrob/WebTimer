@@ -24,16 +24,18 @@ public class GetData extends HttpServlet {
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 * Returns a simpel text-string of the current countdown.
+	 * Returns a simpel json object of the current countdown.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.trace("Received a getdata request.");
-		response.setContentType("application/text;charset=UTF-8");
-		response.getWriter().append(String.valueOf(CountdownTimer.getCountdown()));
-		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval()));
-		response.getWriter().append("_").append(String.valueOf(CountdownTimer.getInterval2()));
-		response.getWriter().append("_").append(CountdownTimer.getComments());
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().append("{");
+		response.getWriter().append("\"countdown\": " + String.valueOf(CountdownTimer.getCountdown()) + ",");
+		response.getWriter().append("\"interval\": " + String.valueOf(CountdownTimer.getInterval()) + ",");
+		response.getWriter().append("\"interval2\": " + String.valueOf(CountdownTimer.getInterval2()) + ",");
+		response.getWriter().append("\"comments\": \"" + CountdownTimer.getComments() + "\"");
+		response.getWriter().append("}");
 	}
 
 }

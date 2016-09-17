@@ -11,19 +11,16 @@ function update(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			var data = xhttp.responseText.split("_");
-			document.getElementById("countdowntimeparagraph").innerHTML = data[0];
-			document.getElementById("timersparagraph").innerHTML = data[1];
-			document.getElementById("timersparagraph2").innerHTML = data[2];
-			document.getElementById("userComments").innerHTML = data[3];
+			data = JSON.parse(xhttp.response);
+			document.getElementById("countdowntimeparagraph").innerHTML = data.countdown;
+			document.getElementById("timersparagraph").innerHTML = data.interval;
+			document.getElementById("timersparagraph2").innerHTML = data.interval2;
+			document.getElementById("userComments").innerHTML = data.comments;
 			
 			//change background color when count down is reached
-			var countdown = parseInt(data[0]);
-			var interval = parseInt(data[1]);
-			var interval2 = parseInt(data[2]);
-			showOrHideInterval(interval!=999999);
-			showOrHideInterval2(interval2!=999999);
-			if (countdown > 0 || alreadyFlashed){
+			showOrHideInterval(data.interval!=999999);
+			showOrHideInterval2(data.interval2!=999999);
+			if (data.countdown > 0 || alreadyFlashed){
 				document.body.style.backgroundColor = "green";
 				if (alreadyFlashed){
 					document.body.style.backgroundColor = "red"
