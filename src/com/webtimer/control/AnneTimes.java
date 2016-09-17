@@ -79,7 +79,7 @@ public class AnneTimes extends HttpServlet {
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 120; q>=10; q-=10){
-			theTimes.add(q*1000);
+			theTimes.add(q);
 		}
 		return theTimes;
 	}
@@ -97,7 +97,7 @@ public class AnneTimes extends HttpServlet {
 		List<Integer> theTimes = new ArrayList<Integer>();
 		theTimes = new ArrayList<Integer>();
 		for (int q = 1; q<=n; q++){
-			theTimes.add(t*1000);
+			theTimes.add(t);
 		}
 		return theTimes;
 	}

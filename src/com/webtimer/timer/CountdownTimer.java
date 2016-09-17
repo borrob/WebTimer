@@ -11,7 +11,7 @@ public class CountdownTimer {
 	private Timer timer;
 
 	private final int DELAY = 0;
-	private final int UPDATE_INTERVAL = 1000;
+	private final int UPDATE_INTERVAL = 1;
 
 	private static int defaultInterval;
 	
@@ -20,7 +20,7 @@ public class CountdownTimer {
 	private static List<Integer> anneTimes;
 	private static boolean useAnneTimes = false;
 	
-	private static int countdown = 3000; //the time left over in the current interval
+	private static int countdown = 3; //the time left over in the current interval
 	private static String comments = "";
 	public static boolean isRunning = false;
 	
@@ -57,7 +57,7 @@ public class CountdownTimer {
 	}
 	
 	public static int getIntervalSec() {
-		return interval/1000;
+		return interval;
 	}
 
 	public static void setInterval(int interval) {
@@ -69,7 +69,7 @@ public class CountdownTimer {
 	}
 	
 	public static int getInterval2Sec() {
-		return interval2/1000;
+		return interval2;
 	}
 
 	public static void setInterval2(int interval) {
@@ -85,7 +85,7 @@ public class CountdownTimer {
 			CountdownTimer.anneTimes = anneTimes;
 			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
 			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
-			CountdownTimer.setCountdown(3000);
+			CountdownTimer.setCountdown(3);
 			CountdownTimer.useAnneTimes=true;
 			logger.debug("anneTimes and the intervals are set!");
 			
@@ -101,7 +101,7 @@ public class CountdownTimer {
 	}
 	
 	public static int getCountdownSec() {
-		return countdown/1000;
+		return countdown;
 	}
 
 	public static void setCountdown(int countdown) {
@@ -177,8 +177,8 @@ public class CountdownTimer {
 						if (logger.isTraceEnabled()){logger.trace("Timer is at: " + String.valueOf(countdown));}
 					}
 				},
-				this.DELAY,
-				this.UPDATE_INTERVAL
+				this.DELAY * 1000, //miliseconds
+				this.UPDATE_INTERVAL * 1000 //miliseconds
 				);
 		isRunning=true;
 		return isRunning;

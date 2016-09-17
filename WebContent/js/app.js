@@ -21,8 +21,8 @@ function update(){
 			var countdown = parseInt(data[0]);
 			var interval = parseInt(data[1]);
 			var interval2 = parseInt(data[2]);
-			showOrHideInterval(interval!=999);
-			showOrHideInterval2(interval2!=999);
+			showOrHideInterval(interval!=999999);
+			showOrHideInterval2(interval2!=999999);
 			if (countdown > 0 || alreadyFlashed){
 				document.body.style.backgroundColor = "green";
 				if (alreadyFlashed){
@@ -31,7 +31,7 @@ function update(){
 			}
 			else {
 				flash();
-				if (interval == 999){
+				if (interval == 999999){
 					alreadyFlashed=true;;
 				}
 			}
