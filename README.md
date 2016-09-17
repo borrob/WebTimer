@@ -8,8 +8,8 @@ piano duo experimenting with electro-acoustic music via improvisation. Their
 performances show a diverse range of computer sounds in combination with
 improvised piano music.
 
-Interested? Have a look at the work of @narcode, or take a look at the
-Off&lt&gtzz [youtube channel]
+Interested? Have a look at the work of [@narcode](https://github.com/narcode),
+or take a look at the Off&lt;&gt;zz [youtube channel]
 (https://www.youtube.com/channel/UCJCFCrJFEm1yLS9itcUNjuQ) or [SoundCloud]
 (https://soundcloud.com/offzz).
 
@@ -27,9 +27,9 @@ comments, so it becomes an entire interactive performance experience.
 
 There are a couple of special commands (links) to reset the timer, to clear the
 user comments, or to set a special set of intervals. The special set can be a
-series of 120, 110, 100, ..., 10 seconds, or a set number of the same interval
+series of 120, 110, 100, ..., 10 seconds, or a number of the same interval
 time. When the series ends, no new intervals are added anymore and the timer
-ends with a red screen (until you set a new set of timers or reset the clock).
+ends with a red screen (until you start a new set of intervals or reset the clock).
 
 ## How to build, install and run?
 The WebTimer is a JAVA web application. You can tell maven to 'package' the
