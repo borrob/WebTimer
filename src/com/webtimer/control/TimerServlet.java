@@ -60,9 +60,9 @@ public class TimerServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.trace("Received a get timer request.");
-		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdownSec()));
-		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getIntervalSec()));
-		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2Sec()));
+		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
+		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
+		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
 		request.setAttribute("userComments", CountdownTimer.getComments());
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/timer.jsp");
