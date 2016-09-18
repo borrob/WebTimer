@@ -55,7 +55,7 @@ public class AnneTimes extends HttpServlet {
 					logger.debug("Resetting the timer.");
 					CountdownTimer cdt = new CountdownTimer();
 					if (CountdownTimer.isRunning){
-						cdt.stop();
+						cdt.stopAndReset();
 						cdt.start();
 					} else {
 						cdt.start();

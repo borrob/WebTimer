@@ -179,6 +179,16 @@ public class CountdownTimer {
 		logger.info("Stopping the timer.");
 		timer.cancel();
 		isRunning=false;
+		return isRunning;
+	}
+	
+	/**
+	 * Stop and reset the timer.
+	 *
+	 * Calls the stop() method and then resets the intervals and anneTimes.
+	 */
+	public boolean stopAndReset(){
+		stop();
 		useAnneTimes=false;
 		anneTimes = null;
 		interval = defaultInterval;

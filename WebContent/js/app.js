@@ -28,7 +28,7 @@ function update(){
 			}
 			else {
 				flash();
-				if (interval == 999999){
+				if (data.interval == 999999){
 					alreadyFlashed=true;;
 				}
 			}
