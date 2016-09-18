@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: red;
+	background-color: green;
 	color: white;
 	font-family: sans-serif;
 }
 
-a:visited {
+a:link, a:visited {
 	color: white;
 }
 

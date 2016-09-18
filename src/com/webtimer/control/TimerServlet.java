@@ -33,7 +33,23 @@ public class TimerServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		logger.info("Starting up WebTimer !");
+		logger.info("Starting up WebTimer and setting all the paramters van web.xml !");
+		
+		String defaultInterval = getServletContext().getInitParameter("default_interval");
+		CountdownTimer.setDefaultInterval(Integer.valueOf(defaultInterval));
+		String initialCountdown = getServletContext().getInitParameter("initial_countdown");
+		CountdownTimer.setCountdown(Integer.valueOf(initialCountdown));
+		String plusTime = getServletContext().getInitParameter("plus_time");
+		CountdownTimer.setPlusTime(Integer.valueOf(plusTime));
+		String minusTime = getServletContext().getInitParameter("minus_time");
+		CountdownTimer.setMinusTime(Integer.valueOf(minusTime));
+		String lowerLimit = getServletContext().getInitParameter("lower_limit");
+		CountdownTimer.setLowerLimit(Integer.valueOf(lowerLimit));
+		String higherLimit = getServletContext().getInitParameter("higher_limit");
+		CountdownTimer.setHigherLimit(Integer.valueOf(higherLimit));
+		String maxLinesUserComments = getServletContext().getInitParameter("max_lines_user_comments");
+		CountdownTimer.setMaxLinesUserComments(Integer.valueOf(maxLinesUserComments));
+		
 		cdt = new CountdownTimer();
 		cdt.start();
 	}
@@ -44,9 +60,9 @@ public class TimerServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.trace("Received a get timer request.");
-		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdownSec()));
-		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getIntervalSec()));
-		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2Sec()));
+		request.setAttribute("countdown", String.valueOf(CountdownTimer.getCountdown()));
+		request.setAttribute("next_interval", String.valueOf(CountdownTimer.getInterval()));
+		request.setAttribute("next_interval2", String.valueOf(CountdownTimer.getInterval2()));
 		request.setAttribute("userComments", CountdownTimer.getComments());
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/timer.jsp");

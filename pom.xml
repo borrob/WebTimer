@@ -1,8 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>WebTimer</groupId>
   <artifactId>WebTimer</artifactId>
-  <version>0.2.0</version>
+  <version>1.0.0</version>
   <packaging>war</packaging>
   <name>WebTimer</name>
   <description>A egg timer over the internet.</description>
@@ -43,4 +43,9 @@
     	<version>1.2.17</version>
 	</dependency>
   </dependencies>
+  <scm>
+  	<url>https://github.com/borrob/WebTimer</url>
+  	<developerConnection>borrob</developerConnection>
+  	<connection>git@github.com:borrob/WebTimer.git</connection>
+  </scm>
 </project>
