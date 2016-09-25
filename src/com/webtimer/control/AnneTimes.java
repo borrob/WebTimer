@@ -36,8 +36,7 @@ public class AnneTimes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!CountdownTimer.isRunning){
-			CountdownTimer cdt = new CountdownTimer();
-			cdt.start();
+			CountdownTimer.start();
 		}
 		
 		if (request.getParameterMap().containsKey("style")){
@@ -53,13 +52,16 @@ public class AnneTimes extends HttpServlet {
 					break;
 				case "reset":
 					logger.debug("Resetting the timer.");
-					CountdownTimer cdt = new CountdownTimer();
 					if (CountdownTimer.isRunning){
-						cdt.stopAndReset();
-						cdt.start();
+						CountdownTimer.stopAndReset();
+						CountdownTimer.start();
 					} else {
-						cdt.start();
+						CountdownTimer.start();
 					}
+					break;
+				case "random":
+					logger.debug("Use random times");
+					CountdownTimer.setRandom(true);
 					break;
 				case "testing":
 					logger.debug("Setting the intervals for testing purposes");
