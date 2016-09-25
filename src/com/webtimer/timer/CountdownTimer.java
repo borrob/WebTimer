@@ -367,12 +367,12 @@ public class CountdownTimer {
 	}
 	
 	/**
-	 * Generate a random interval.
+	 * Generate a random interval (between lowerlimit and higherlimit and in steps op 10 secoonds.
 	 * 
 	 * @return a new random interval period (ms).
 	 */
 	private static int randomInterval(){
-		int interval = rand.nextInt((higherLimit-lowerLimit)) + lowerLimit;
+		int interval = 10*rand.nextInt((higherLimit-lowerLimit)/10) + lowerLimit;
 		if (logger.isDebugEnabled()){logger.debug("New random interval: " + String.valueOf(interval));}
 		return interval;
 	}
