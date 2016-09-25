@@ -76,7 +76,7 @@ public class CountdownTimer {
 	}
 
 	public static void setAnneTimes(List<Integer> aT) {
-		if (anneTimes.size()>2){
+		if (aT.size()>2){
 			anneTimes = aT;
 			setInterval(anneTimes.remove(0));
 			setInterval2(anneTimes.remove(0));
@@ -225,10 +225,13 @@ public class CountdownTimer {
 	private static void timeStep(){
 		if(isRunning){
 			
-			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(useAnneTimes));}
+			if (countdown>0){
+				countdown -= UPDATE_INTERVAL;
+			} else {
 			
-			if (useAnneTimes){
-				if (countdown <= 0){ //timer ran out
+				if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(useAnneTimes));}
+				
+				if (useAnneTimes){
 					if (interval==999999){ //this must have been the last countdown of this set, because interval=999999
 						stop();
 						return;
@@ -240,22 +243,18 @@ public class CountdownTimer {
 					} else { //list ran out --> set indicator for end of list
 						interval2 = 999999;
 					}
-				}
-			} else {
-				if (useRandom){
-					if (countdown <= 0){
+				} else {
+					if (useRandom){
 						countdown = interval;
 						interval = interval2;
 						interval2 = randomInterval();
-					}
-				}else { //not using anneTimes or random--> keep using the default interval
-					if (countdown <= 0){
+					}else { //not using anneTimes or random--> keep using the default interval
 						countdown = interval;
 						interval = interval2;
 						interval2 = defaultInterval;
 					}
+					
 				}
-				countdown -= UPDATE_INTERVAL;
 			}
 		}
 	}

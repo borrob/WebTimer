@@ -66,6 +66,7 @@ public class AnneTimes extends HttpServlet {
 				case "testing":
 					logger.debug("Setting the intervals for testing purposes");
 					CountdownTimer.setAnneTimes(getTimesN_T(3, 5));
+					break;
 			}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");
