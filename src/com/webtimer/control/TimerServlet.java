@@ -19,7 +19,6 @@ public class TimerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger logger = Logger.getLogger(TimerServlet.class);
 
-	private CountdownTimer cdt;
 
 	public TimerServlet() {
 		super();
@@ -50,8 +49,7 @@ public class TimerServlet extends HttpServlet {
 		String maxLinesUserComments = getServletContext().getInitParameter("max_lines_user_comments");
 		CountdownTimer.setMaxLinesUserComments(Integer.valueOf(maxLinesUserComments));
 		
-		cdt = new CountdownTimer();
-		cdt.start();
+		CountdownTimer.start();
 	}
 
 	/*
@@ -83,7 +81,7 @@ public class TimerServlet extends HttpServlet {
 	@Override
 	public void destroy(){
 		logger.info("Shutting down WebTimer");
-		cdt.stop();
+		CountdownTimer.stop();
 	}
 
 }

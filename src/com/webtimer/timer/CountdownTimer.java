@@ -1,6 +1,7 @@
 package com.webtimer.timer;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,8 +11,8 @@ public class CountdownTimer {
 
 	private static Timer timer;
 
-	private final int DELAY = 0;
-	private final int UPDATE_INTERVAL = 1;
+	private final static int DELAY = 0;
+	private final static int UPDATE_INTERVAL = 1;
 
 	private static int defaultInterval;
 	
@@ -19,6 +20,8 @@ public class CountdownTimer {
 	private static int interval2;
 	private static List<Integer> anneTimes;
 	private static boolean useAnneTimes = false;
+	private static boolean useRandom = false;
+	private static Random rand = new Random();
 	
 	private static int countdown = 3; //the time left over in the current interval
 	private static String comments = "";
@@ -44,7 +47,7 @@ public class CountdownTimer {
 	
 	/* GETTER AND SETTERS */
 	
-	public int getDefaultInterval() {
+	public static int getDefaultInterval() {
 		return defaultInterval;
 	}
 	
@@ -72,20 +75,35 @@ public class CountdownTimer {
 		return anneTimes;
 	}
 
-	public static void setAnneTimes(List<Integer> anneTimes) {
-		if (anneTimes.size()>2){
-			CountdownTimer.anneTimes = anneTimes;
-			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
-			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
-			CountdownTimer.setCountdown(3);
-			CountdownTimer.useAnneTimes=true;
+	public static void setAnneTimes(List<Integer> aT) {
+		if (aT.size()>2){
+			anneTimes = aT;
+			setInterval(anneTimes.remove(0));
+			setInterval2(anneTimes.remove(0));
+			setCountdown(3);
+			useAnneTimes=true;
 			logger.debug("anneTimes and the intervals are set!");
 			
-			if (!CountdownTimer.isRunning){
-				CountdownTimer cdt = new CountdownTimer();
-				cdt.start();
+			if (!isRunning){
+				start();
 			}
 		}
+	}
+	
+	public static void setRandom(boolean r) {
+		useRandom = r;
+		setInterval(randomInterval());
+		setInterval2(randomInterval());
+		setCountdown(3);
+		logger.debug("Random intervals are set!");
+		
+		if (!isRunning){
+			start();
+		}
+	}
+	
+	public static boolean getRandom() {
+		return useRandom;
 	}
 
 	public static int getCountdown() {
@@ -151,7 +169,7 @@ public class CountdownTimer {
 	/**
 	 * Start the timer and keep it going.
 	 */
-	public boolean start(){
+	public static boolean start(){
 		logger.info("Starting the timer.");
 		
 		setTheIntervals();
@@ -165,8 +183,8 @@ public class CountdownTimer {
 						if (logger.isTraceEnabled()){logger.trace("Timer is at: " + String.valueOf(countdown));}
 					}
 				},
-				this.DELAY * 1000, //miliseconds
-				this.UPDATE_INTERVAL * 1000 //miliseconds
+				DELAY * 1000, //miliseconds
+				UPDATE_INTERVAL * 1000 //miliseconds
 				);
 		isRunning=true;
 		return isRunning;
@@ -175,7 +193,7 @@ public class CountdownTimer {
 	/**
 	 * Stop the timer.
 	 */
-	public boolean stop(){
+	public static boolean stop(){
 		logger.info("Stopping the timer.");
 		timer.cancel();
 		isRunning=false;
@@ -187,10 +205,11 @@ public class CountdownTimer {
 	 *
 	 * Calls the stop() method and then resets the intervals and anneTimes.
 	 */
-	public boolean stopAndReset(){
+	public static boolean stopAndReset(){
 		stop();
 		useAnneTimes=false;
 		anneTimes = null;
+		useRandom = false;
 		interval = defaultInterval;
 		interval2 = defaultInterval;
 		countdown = 3;
@@ -200,16 +219,21 @@ public class CountdownTimer {
 	/**
 	 * Helper method to update the time left over in the current run.
 	 * Reset interval when it runs out.
+	 * 
+	 * TODO: improve on DRY principle: deal with the different if-statements
 	 */
-	private void timeStep(){
-		if(CountdownTimer.isRunning){
+	private static void timeStep(){
+		if(isRunning){
 			
-			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
+			if (countdown>0){
+				countdown -= UPDATE_INTERVAL;
+			} else {
 			
-			if (CountdownTimer.useAnneTimes){
-				if (countdown <= 0){ //timer ran out
+				if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(useAnneTimes));}
+				
+				if (useAnneTimes){
 					if (interval==999999){ //this must have been the last countdown of this set, because interval=999999
-						this.stop();
+						stop();
 						return;
 					}
 					countdown = interval;
@@ -219,15 +243,19 @@ public class CountdownTimer {
 					} else { //list ran out --> set indicator for end of list
 						interval2 = 999999;
 					}
-				}
-			} else { //not using anneTimes --> keep using the default interval
-				if (countdown <= 0){
-					countdown = interval;
-					interval = interval2;
-					interval2 = defaultInterval;
+				} else {
+					if (useRandom){
+						countdown = interval;
+						interval = interval2;
+						interval2 = randomInterval();
+					}else { //not using anneTimes or random--> keep using the default interval
+						countdown = interval;
+						interval = interval2;
+						interval2 = defaultInterval;
+					}
+					
 				}
 			}
-			countdown -= UPDATE_INTERVAL;
 		}
 	}
 	
@@ -324,13 +352,28 @@ public class CountdownTimer {
 	 * Set the interval and interval2 to either the first two times of anneTimes or the defatult.
 	 */
 	static private void setTheIntervals(){
-		if (CountdownTimer.useAnneTimes && anneTimes != null && anneTimes.size()>2){
+		if (useAnneTimes && anneTimes != null && anneTimes.size()>2){
 			interval = anneTimes.remove(0);
 			interval2 = anneTimes.remove(0);
 		} else {
-			interval = defaultInterval;
-			interval2 = defaultInterval;
-			
+			if (useRandom){
+				interval = randomInterval();
+				interval2 = randomInterval();
+			} else {
+				interval = defaultInterval;
+				interval2 = defaultInterval;
+			}	
 		}
+	}
+	
+	/**
+	 * Generate a random interval (between lowerlimit and higherlimit and in steps op 10 secoonds.
+	 * 
+	 * @return a new random interval period (ms).
+	 */
+	private static int randomInterval(){
+		int interval = 10*rand.nextInt((higherLimit-lowerLimit)/10) + lowerLimit;
+		if (logger.isDebugEnabled()){logger.debug("New random interval: " + String.valueOf(interval));}
+		return interval;
 	}
 }
