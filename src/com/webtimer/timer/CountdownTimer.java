@@ -47,7 +47,7 @@ public class CountdownTimer {
 	
 	/* GETTER AND SETTERS */
 	
-	public int getDefaultInterval() {
+	public static int getDefaultInterval() {
 		return defaultInterval;
 	}
 	
@@ -75,35 +75,35 @@ public class CountdownTimer {
 		return anneTimes;
 	}
 
-	public static void setAnneTimes(List<Integer> anneTimes) {
+	public static void setAnneTimes(List<Integer> aT) {
 		if (anneTimes.size()>2){
-			CountdownTimer.anneTimes = anneTimes;
-			CountdownTimer.setInterval(CountdownTimer.anneTimes.remove(0));
-			CountdownTimer.setInterval2(CountdownTimer.anneTimes.remove(0));
-			CountdownTimer.setCountdown(3);
-			CountdownTimer.useAnneTimes=true;
+			anneTimes = aT;
+			setInterval(anneTimes.remove(0));
+			setInterval2(anneTimes.remove(0));
+			setCountdown(3);
+			useAnneTimes=true;
 			logger.debug("anneTimes and the intervals are set!");
 			
-			if (!CountdownTimer.isRunning){
-				CountdownTimer.start();
+			if (!isRunning){
+				start();
 			}
 		}
 	}
 	
 	public static void setRandom(boolean r) {
 		useRandom = r;
-		setInterval(CountdownTimer.randomInterval());
-		setInterval2(CountdownTimer.randomInterval());
+		setInterval(randomInterval());
+		setInterval2(randomInterval());
 		setCountdown(3);
 		logger.debug("Random intervals are set!");
 		
-		if (!CountdownTimer.isRunning){
-			CountdownTimer.start();
+		if (!isRunning){
+			start();
 		}
 	}
 	
 	public static boolean getRandom() {
-		return CountdownTimer.useRandom;
+		return useRandom;
 	}
 
 	public static int getCountdown() {
@@ -183,8 +183,8 @@ public class CountdownTimer {
 						if (logger.isTraceEnabled()){logger.trace("Timer is at: " + String.valueOf(countdown));}
 					}
 				},
-				CountdownTimer.DELAY * 1000, //miliseconds
-				CountdownTimer.UPDATE_INTERVAL * 1000 //miliseconds
+				DELAY * 1000, //miliseconds
+				UPDATE_INTERVAL * 1000 //miliseconds
 				);
 		isRunning=true;
 		return isRunning;
@@ -223,14 +223,14 @@ public class CountdownTimer {
 	 * TODO: improve on DRY principle: deal with the different if-statements
 	 */
 	private static void timeStep(){
-		if(CountdownTimer.isRunning){
+		if(isRunning){
 			
-			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(CountdownTimer.useAnneTimes));}
+			if(logger.isTraceEnabled()){logger.trace("Using annetime? " + String.valueOf(useAnneTimes));}
 			
-			if (CountdownTimer.useAnneTimes){
+			if (useAnneTimes){
 				if (countdown <= 0){ //timer ran out
 					if (interval==999999){ //this must have been the last countdown of this set, because interval=999999
-						CountdownTimer.stop();
+						stop();
 						return;
 					}
 					countdown = interval;
@@ -242,7 +242,7 @@ public class CountdownTimer {
 					}
 				}
 			} else {
-				if (CountdownTimer.useRandom){
+				if (useRandom){
 					if (countdown <= 0){
 						countdown = interval;
 						interval = interval2;
@@ -255,7 +255,7 @@ public class CountdownTimer {
 						interval2 = defaultInterval;
 					}
 				}
-				countdown -= CountdownTimer.UPDATE_INTERVAL;
+				countdown -= UPDATE_INTERVAL;
 			}
 		}
 	}
@@ -353,11 +353,11 @@ public class CountdownTimer {
 	 * Set the interval and interval2 to either the first two times of anneTimes or the defatult.
 	 */
 	static private void setTheIntervals(){
-		if (CountdownTimer.useAnneTimes && anneTimes != null && anneTimes.size()>2){
+		if (useAnneTimes && anneTimes != null && anneTimes.size()>2){
 			interval = anneTimes.remove(0);
 			interval2 = anneTimes.remove(0);
 		} else {
-			if (CountdownTimer.useRandom){
+			if (useRandom){
 				interval = randomInterval();
 				interval2 = randomInterval();
 			} else {
@@ -368,7 +368,7 @@ public class CountdownTimer {
 	}
 	
 	/**
-	 * Generate a ranom interval.
+	 * Generate a random interval.
 	 * 
 	 * @return a new random interval period (ms).
 	 */
