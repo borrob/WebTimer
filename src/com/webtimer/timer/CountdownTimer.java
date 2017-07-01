@@ -343,6 +343,7 @@ public class CountdownTimer {
 			logger.debug("Shortening user comments.");
 			comments = l_comments[maxLinesUserComments - 2];
 			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
+				//TODO: use stringbuilder instead
 				comments = l_comments[i] + "<BR/>" + comments;
 			}
 		}
