@@ -13,7 +13,12 @@
 	</head>
 	<body onload="init()">
 		<h1>WebTimer</h1>
-		<div class="column">
+		<div>
+			<p id="countdowntimeparagraph">
+				<%
+					out.println(Integer.parseInt("" + request.getAttribute("countdown")));
+				%>
+			</p>
 			<div id="nextIntervalDiv" class="next">
 				<p>The next interval is: <span id="timersparagraph" class="intervalText">
 					<%
@@ -23,7 +28,7 @@
 				<button id="plus" class="timerButton">+ 10 sec</button><br/>
 				<button id="minus" class="timerButton">- 10 sec</button><br/>
 			</div>
-			<div id="nextnextIntervalDiv" class="nextnext">
+			<div id="nextnextIntervalDiv" class="next">
 				<p>The interval after that is: <span id="timersparagraph2" class="intervalText">
 					<%
 						out.println(request.getAttribute("next_interval2"));
@@ -33,24 +38,17 @@
 				<button id="minus2" class="timerButton">- 10 sec</button><br/>
 			</div>
 		</div>
-		<div class="column">
-			<p id="countdowntimeparagraph">
+		<div class="bottomthings">
+			<form method="POST" action="TimerComment">
+				<label for="userCommentInput">Add comment:</label><br/>
+				<input type="text" id="userCommentInput" name="userCommentInput" value=""/><br/>
+				<button type="submit" id="commentButton">COMMENT</button>
+			</form>
+			<p id="userComments">
 				<%
-					out.println(Integer.parseInt("" + request.getAttribute("countdown")));
+					out.println(request.getAttribute("userComments"));
 				%>
 			</p>
-			<div>
-				<form method="POST" action="TimerComment">
-					<label for="userCommentInput">Add comment:</label>
-					<input type="text" id="userCommentInput" name="userCommentInput" value=""/>
-					<button type="submit" id="commentButton">COMMENT</button>
-				</form>
-				<p id="userComments">
-					<%
-						out.println(request.getAttribute("userComments"));
-					%>
-				</p>
-			</div>
 		</div>
 
 	</body>

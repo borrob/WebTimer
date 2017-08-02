@@ -319,13 +319,14 @@ public class CountdownTimer {
 	 * @param c the user comment to add
 	 */
 	public static void addToComments(String c){
-		if (logger.isDebugEnabled()){logger.debug("Adding user comment: " + c);}
+		String com = c.replaceAll("\\\\", "nobackslash");//backslashes are evil.
+		if (logger.isDebugEnabled()){logger.debug("Adding user comment: " + com);}
 		if (comments.isEmpty()){
-			comments = c;
+			comments = com;
 			return;
 		}
 		checkAndLimitUserComments();
-		comments = c + "<BR/>" + comments;
+		comments = com + "<BR/>" + comments;
 	}
 	
 	/**
@@ -343,6 +344,7 @@ public class CountdownTimer {
 			logger.debug("Shortening user comments.");
 			comments = l_comments[maxLinesUserComments - 2];
 			for (int i = maxLinesUserComments - 2 -1; i >= 0; i--){
+				//TODO: use stringbuilder instead
 				comments = l_comments[i] + "<BR/>" + comments;
 			}
 		}

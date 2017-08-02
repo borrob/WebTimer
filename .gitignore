@@ -19,3 +19,4 @@ hs_err_pid*
 target/
 !release/*
 .DS_STORE
+/build/

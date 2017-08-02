@@ -54,10 +54,8 @@ public class AnneTimes extends HttpServlet {
 					logger.debug("Resetting the timer.");
 					if (CountdownTimer.isRunning){
 						CountdownTimer.stopAndReset();
-						CountdownTimer.start();
-					} else {
-						CountdownTimer.start();
 					}
+					CountdownTimer.start();
 					break;
 				case "random":
 					logger.debug("Use random times");

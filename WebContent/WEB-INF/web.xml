@@ -30,6 +30,6 @@
   </context-param>
       <context-param>
   	<param-name>max_lines_user_comments</param-name>
-  	<param-value>5</param-value>
+  	<param-value>10</param-value>
   </context-param>
 </web-app>
