@@ -102,6 +102,10 @@ public class CountdownTimer {
 		}
 	}
 	
+	public static void congratulate() {
+		logger.debug("Happy Birthday Mister Rob! Congratulations for such an extraordinary year!");
+	}
+	
 	public static boolean getRandom() {
 		return useRandom;
 	}
