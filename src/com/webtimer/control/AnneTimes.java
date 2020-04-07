@@ -61,6 +61,10 @@ public class AnneTimes extends HttpServlet {
 					logger.debug("Use random times");
 					CountdownTimer.setRandom(true);
 					break;
+				case "borrobob_bday":
+					logger.debug("Is it April 7th already?");
+					CountdownTimer.congratulate();
+					break;					
 				case "testing":
 					logger.debug("Setting the intervals for testing purposes");
 					CountdownTimer.setAnneTimes(getTimesN_T(3, 5));
