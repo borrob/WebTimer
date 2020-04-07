@@ -42,7 +42,7 @@ public class TimerComment extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameterMap().containsKey("userCommentInput")){
-			if (logger.isDebugEnabled()){logger.debug("Received a user comment: " + request.getParameter("userCommentInput"));}
+			if (logger.isDebugEnabled()){logger.debug("Received a user comment: " + request.getParameter("userCommentInput") + " VAE A VERY HAPPY ONE!");}
 			CountdownTimer.addToComments(request.getParameter("userCommentInput"));
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/timer");	
